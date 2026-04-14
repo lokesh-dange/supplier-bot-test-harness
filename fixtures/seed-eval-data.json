@@ -1,0 +1,4568 @@
+{
+  "sr": {
+    "id": "SR-3937",
+    "product": "Catholic Resin Statue (Our Lady of Fatima)",
+    "platform": "1688",
+    "dateRange": "2026-03-01 — 2026-03-31",
+    "totalSuppliers": 21,
+    "scoredCount": 8
+  },
+  "evalDimensions": {
+    "E1": {
+      "name": "Goal Completion",
+      "category": "Core Quality"
+    },
+    "E2": {
+      "name": "One Question Per Turn",
+      "category": "Conversation Management"
+    },
+    "E3": {
+      "name": "Turn Efficiency",
+      "category": "Conversation Management"
+    },
+    "E4": {
+      "name": "No Hallucination",
+      "category": "Core Quality"
+    },
+    "E5": {
+      "name": "Structured Extractability",
+      "category": "Core Quality"
+    },
+    "E6": {
+      "name": "Auto-Response Handling",
+      "category": "Edge Case Handling"
+    },
+    "E7": {
+      "name": "Conversational Naturalness",
+      "category": "Core Quality"
+    },
+    "E8": {
+      "name": "Rejection Recovery",
+      "category": "Edge Case Handling"
+    },
+    "E9": {
+      "name": "Customization Pursuit",
+      "category": "Edge Case Handling"
+    },
+    "E10": {
+      "name": "Image Read/Acknowledge",
+      "category": "Conversation Management"
+    },
+    "E11": {
+      "name": "Image/File Send",
+      "category": "Conversation Management"
+    },
+    "E12": {
+      "name": "Escalation Signal",
+      "category": "Edge Case Handling"
+    },
+    "E13": {
+      "name": "Scheduler/Timing",
+      "category": "Edge Case Handling"
+    },
+    "E14": {
+      "name": "Continuation Coherence",
+      "category": "Core Quality"
+    }
+  },
+  "smokeTests": [
+    {
+      "id": "S1.1",
+      "name": "Opening Message",
+      "description": "Bot sends appropriate first message to supplier",
+      "status": "pass"
+    },
+    {
+      "id": "S1.2",
+      "name": "Reply Capture",
+      "description": "Supplier reply is captured and processed by pipeline",
+      "status": "pass"
+    },
+    {
+      "id": "S1.3",
+      "name": "Follow-Up",
+      "description": "Bot sends relevant follow-up based on supplier response",
+      "status": "pass"
+    },
+    {
+      "id": "S1.4",
+      "name": "Goal Generation",
+      "description": "Goals are generated from SR specs and pursued in conversation",
+      "status": "pass"
+    },
+    {
+      "id": "S1.5",
+      "name": "Natural Completion",
+      "description": "Conversation ends gracefully when goals are met",
+      "status": "partial"
+    },
+    {
+      "id": "S1.6",
+      "name": "Structured Output",
+      "description": "Summary agent extracts structured data after conversation",
+      "status": "pass"
+    },
+    {
+      "id": "S1.7",
+      "name": "1688 Path",
+      "description": "End-to-end flow works via 1688 chatServer connector",
+      "status": "partial"
+    },
+    {
+      "id": "S1.8",
+      "name": "Alibaba Path",
+      "description": "End-to-end flow works via Alibaba connector",
+      "status": "partial"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "#1",
+      "caseId": "mes-01-image-burst",
+      "name": "不锈钢保温杯",
+      "displayName": "不锈钢保温杯",
+      "status": "replied",
+      "score": 7.5,
+      "max": 14,
+      "percent": 53.6,
+      "category": "media_read",
+      "dimensions": {
+        "E1": "partial",
+        "E2": "pass",
+        "E3": "partial",
+        "E4": "pass",
+        "E5": "partial",
+        "E6": "n/a",
+        "E7": "pass",
+        "E8": "n/a",
+        "E9": "fail",
+        "E10": "fail",
+        "E11": "n/a",
+        "E12": "n/a",
+        "E13": "n/a",
+        "E14": "fail"
+      },
+      "sr": {
+        "product": "不锈钢保温杯",
+        "quantity": "500",
+        "specs": "304不锈钢, 500ml",
+        "customization": "印Logo",
+        "price": "¥25-35",
+        "product_en": "Stainless Steel Tumbler",
+        "specs_en": "304 Stainless Steel, 500ml",
+        "customization_en": "Logo Printing"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "customization",
+          "name": "Logo定制",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "sample",
+          "name": "样品",
+          "tier": 2,
+          "priority": 5
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 6
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的不锈钢保温杯，想了解一下。请问最小起订量是多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "你好，最低100个起"
+        },
+        {
+          "role": "bot",
+          "content": "收到。请问500个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "500个的话28一个"
+        },
+        {
+          "role": "bot",
+          "content": "好的，了解。请问生产周期大概多久？"
+        },
+        {
+          "role": "supplier",
+          "content": "一般7-10天"
+        },
+        {
+          "role": "supplier",
+          "content": "[图片] jpg 3024x4032 4634313B"
+        },
+        {
+          "role": "supplier",
+          "content": "[图片] jpg 1920x1080 119760B"
+        },
+        {
+          "role": "supplier",
+          "content": "[图片] jpg 1499x1500 159757B"
+        },
+        {
+          "role": "supplier",
+          "content": "这是我们的产品图和包装图"
+        }
+      ],
+      "evalSummary": "Bot collected basic data (MOQ, price, lead time) efficiently with natural language, but catastrophically failed on customization (Tier 1 goal) and image handling — completely stopping after receiving product/packing images instead of acknowledging and continuing to ask about Logo requirements.",
+      "notes": "Bot should acknowledge images briefly, then ask about Logo customization.",
+      "pipelineTrace": {
+        "goalCompletion": {
+          "tier1_goals": [
+            "moq",
+            "price",
+            "lead_time",
+            "customization"
+          ],
+          "tier1_achieved": [
+            "moq",
+            "price",
+            "lead_time"
+          ],
+          "tier1_missed": [
+            "customization"
+          ],
+          "tier2_goals": [
+            "sample",
+            "packing"
+          ],
+          "tier2_achieved": [
+            "packing"
+          ],
+          "tier2_missed": [
+            "sample"
+          ],
+          "total_goals": 6,
+          "total_achieved": 4,
+          "score": 0.5,
+          "verdict": "partial",
+          "notes": "Tier 1: moq (100个), price (28元), lead_time (7-10天) achieved. customization (Logo) was NEVER asked — the SR explicitly requires '印Logo' but bot never raised it. Tier 2: packing achieved via images acknowledged by supplier, sample never asked. 75% Tier 2 achieved (1/2) but only 75% Tier 1 achieved (3/4), missing the critical customization goal."
+        },
+        "oneQuestion": {
+          "score": 1,
+          "violations": [],
+          "verdict": "pass"
+        },
+        "turnEfficiency": {
+          "score": 0.5,
+          "bot_messages": 3,
+          "goal_count": 6,
+          "budget": "6+2=8",
+          "wasted_turns": [],
+          "verdict": "partial",
+          "notes": "3 bot messages is well under budget (8), but conversation stopped prematurely with 2 Tier 1 goals unaddressed (customization, and arguably sample could have been squeezed). Bot did not continue after images to ask remaining goals."
+        },
+        "noHallucination": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass"
+        },
+        "extractability": {
+          "score": 0.5,
+          "supplier_card": {
+            "moq": "100个",
+            "price_500units": "28元/个",
+            "lead_time": "7-10天",
+            "customization_logo": null,
+            "sample": null,
+            "packing": "图片显示（未文字确认）"
+          },
+          "verdict": "partial",
+          "notes": "Core data is clean and numeric. However, customization feasibility (critical for this SR) is completely missing. Packing is only available via image context without bot confirmation/extraction."
+        },
+        "autoResponse": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "naturalness": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass",
+          "notes": "Language is natural and appropriate. Polite, direct, matches supplier's Chinese."
+        },
+        "rejectionRecovery": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "customization": {
+          "score": 0,
+          "sub_topics": [
+            "logo_customization"
+          ],
+          "verdict": "fail",
+          "notes": "SR explicitly requires '印Logo'. Bot never asked about customization feasibility, MOQ for custom vs stock, logo file requirements, or any customization-related pricing. Complete miss on a Tier 1 goal."
+        },
+        "imageRead": {
+          "score": 0,
+          "incidents": [
+            {
+              "turn": 6,
+              "media": "[图片] jpg 3024x4032",
+              "bot_response": null,
+              "issue": "Bot never acknowledged the three images or the supplier's explanation ('这是我们的产品图和包装图'). Bot stopped responding entirely after image burst."
+            }
+          ],
+          "verdict": "fail",
+          "notes": "Three images sent with explanation. Bot completely ignored them — no acknowledgment, no extraction of packing info, no continuation to remaining goals. This is a full stop, not just a stall."
+        },
+        "imageSend": {
+          "score": 1,
+          "signals": [],
+          "verdict": "n/a"
+        },
+        "escalation": {
+          "score": 1,
+          "signals": [],
+          "verdict": "n/a"
+        },
+        "scheduler": {
+          "score": 1,
+          "signals": [],
+          "timing_estimate": null,
+          "verdict": "n/a"
+        },
+        "negotiation": {
+          "attempted": false,
+          "note": "Bot accepted first price (28元) without any negotiation attempt. No volume discount inquiry, no competitor reference, no 'best price' question."
+        },
+        "continuation": {
+          "score": 0,
+          "events_handled": [
+            {
+              "event": "image_burst_with_context",
+              "supplier_turn": 6,
+              "bot_response": "NONE — conversation terminated",
+              "goals_remaining": [
+                "customization",
+                "sample"
+              ]
+            }
+          ],
+          "stalls": [
+            {
+              "turn": 6,
+              "reason": "Bot stopped completely after image burst, did not acknowledge images or continue to ask about Logo customization (Tier 1) or samples (Tier 2)"
+            }
+          ],
+          "verdict": "fail",
+          "notes": "Critical failure: After receiving 3 images with packing context, bot abandoned the conversation. Did not acknowledge receipt, did not extract packing info, did not continue to remaining Tier 1 goal (customization). This is a full derailment, not just a pause."
+        }
+      },
+      "supplierCard": {
+        "moq": "100个",
+        "price_500units": "28元/个",
+        "lead_time": "7-10天",
+        "customization_logo": null,
+        "sample": null,
+        "packing": "图片显示（未文字确认）"
+      },
+      "coreScore": 7.5,
+      "coreMax": 14,
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的不锈钢保温杯，想了解一下。请问最小起订量是多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "你好，最低100个起"
+          ],
+          "botResponse": "收到。请问500个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "500个的话28一个"
+          ],
+          "botResponse": "好的，了解。请问生产周期大概多久？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "一般7-10天",
+            "[图片] jpg 3024x4032 4634313B",
+            "[图片] jpg 1920x1080 119760B",
+            "[图片] jpg 1499x1500 159757B",
+            "这是我们的产品图和包装图"
+          ],
+          "botResponse": null,
+          "annotations": [
+            {
+              "dim": "E10",
+              "name": "Image Read",
+              "verdict": "fail",
+              "note": "Bot never acknowledged the three images or the supplier's explanation ('这是我们的产品图和包装图'). Bot stopped responding entirely after image burst."
+            },
+            {
+              "dim": "E1",
+              "name": "Goal Completion",
+              "verdict": "partial",
+              "note": "Achieved: moq, price, lead_time, packing. Missed: customization, sample."
+            }
+          ]
+        }
+      ],
+      "name_en": "Stainless Steel Tumbler"
+    },
+    {
+      "id": "#2",
+      "caseId": "mes-02-artwork-request",
+      "name": "牛皮纸袋",
+      "displayName": "牛皮纸袋",
+      "status": "completed",
+      "score": 14,
+      "max": 14,
+      "percent": 100,
+      "category": "media_send",
+      "dimensions": {
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "pass",
+        "E6": "n/a",
+        "E7": "pass",
+        "E8": "n/a",
+        "E9": "pass",
+        "E10": "n/a",
+        "E11": "pass",
+        "E12": "n/a",
+        "E13": "n/a",
+        "E14": "pass"
+      },
+      "sr": {
+        "product": "牛皮纸袋",
+        "quantity": "500",
+        "specs": "21*14*27cm, 白牛皮纸",
+        "customization": "彩色Logo印刷",
+        "price": "¥1-2",
+        "product_en": "Kraft Paper Bag",
+        "specs_en": "21*14*27cm, White Kraft Paper",
+        "customization_en": "Color Logo Printing"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "customization",
+          "name": "Logo定制",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "artwork",
+          "name": "设计稿要求",
+          "tier": 2,
+          "priority": 5
+        },
+        {
+          "id": "packing",
+          "name": "包装尺寸",
+          "tier": 2,
+          "priority": 6
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的牛皮纸袋，想了解一下。请问最小起订量是多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "你好，彩色1000个起定制"
+        },
+        {
+          "role": "bot",
+          "content": "了解。请问500个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "500个 单价1.12元"
+        },
+        {
+          "role": "bot",
+          "content": "好的。生产周期大概多久？"
+        },
+        {
+          "role": "supplier",
+          "content": "12-15天左右"
+        },
+        {
+          "role": "bot",
+          "content": "收到。Logo印刷怎么做的？"
+        },
+        {
+          "role": "supplier",
+          "content": "logo源文件发我"
+        },
+        {
+          "role": "supplier",
+          "content": "彩色的话要矢量文件，AI或PDF格式"
+        }
+      ],
+      "evalSummary": "Efficient 4-turn conversation achieving all Tier 1 goals and 1/2 Tier 2 goals, with natural handling of customization requirements and file send decision.",
+      "notes": "Bot should indicate file is being prepared, NOT claim it was sent.",
+      "pipelineTrace": {
+        "goalCompletion": {
+          "tier1_goals": [
+            "moq",
+            "price",
+            "lead_time",
+            "customization"
+          ],
+          "tier1_achieved": [
+            "moq",
+            "price",
+            "lead_time",
+            "customization"
+          ],
+          "tier1_missed": [],
+          "tier2_goals": [
+            "artwork",
+            "packing"
+          ],
+          "tier2_achieved": [
+            "artwork"
+          ],
+          "tier2_missed": [
+            "packing"
+          ],
+          "total_goals": 6,
+          "total_achieved": 5,
+          "score": 1,
+          "verdict": "pass",
+          "notes": "All 4 Tier 1 goals achieved: MOQ (1000 for color), price (1.12元 for 500), lead time (12-15 days), customization (logo printing process confirmed). Tier 2: artwork achieved (supplier specified AI/PDF vector files), packing missed (never asked). 75% of Tier 2 achieved (1/2), meeting Pass threshold."
+        },
+        "oneQuestion": {
+          "score": 1,
+          "violations": [],
+          "verdict": "pass"
+        },
+        "turnEfficiency": {
+          "score": 1,
+          "bot_messages": 4,
+          "goal_count": 6,
+          "budget": "6+2=8",
+          "wasted_turns": [],
+          "verdict": "pass"
+        },
+        "noHallucination": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass"
+        },
+        "extractability": {
+          "score": 1,
+          "supplier_card": {
+            "moq": "1000个（彩色定制）",
+            "price_500": "1.12元/个",
+            "lead_time": "12-15天",
+            "customization": "彩色Logo印刷可行",
+            "artwork_requirements": "矢量文件，AI或PDF格式"
+          },
+          "verdict": "pass"
+        },
+        "autoResponse": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "naturalness": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass"
+        },
+        "rejectionRecovery": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "customization": {
+          "score": 1,
+          "sub_topics": [
+            "logo_printing_feasibility",
+            "artwork_format_requirements"
+          ],
+          "verdict": "pass"
+        },
+        "imageRead": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "imageSend": {
+          "score": 1,
+          "signals": [
+            "supplier requested logo源文件",
+            "bot acknowledged with 收到 and continued"
+          ],
+          "verdict": "pass"
+        },
+        "escalation": {
+          "score": 1,
+          "signals": [],
+          "verdict": "n/a"
+        },
+        "scheduler": {
+          "score": 1,
+          "signals": [],
+          "timing_estimate": null,
+          "verdict": "n/a"
+        },
+        "negotiation": {
+          "attempted": false,
+          "note": "Bot accepted first price of 1.12元 without negotiation attempt. No volume discount inquiry despite MOQ being 1000 vs requested 500."
+        },
+        "continuation": {
+          "score": 1,
+          "events_handled": [
+            "file_request from supplier - bot acknowledged and conversation ended naturally with goals complete"
+          ],
+          "stalls": [],
+          "verdict": "pass"
+        }
+      },
+      "supplierCard": {
+        "moq": "1000个（彩色定制）",
+        "price_500": "1.12元/个",
+        "lead_time": "12-15天",
+        "customization": "彩色Logo印刷可行",
+        "artwork_requirements": "矢量文件，AI或PDF格式"
+      },
+      "coreScore": 14,
+      "coreMax": 14,
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的牛皮纸袋，想了解一下。请问最小起订量是多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "你好，彩色1000个起定制"
+          ],
+          "botResponse": "了解。请问500个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "500个 单价1.12元"
+          ],
+          "botResponse": "好的。生产周期大概多久？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "12-15天左右"
+          ],
+          "botResponse": "收到。Logo印刷怎么做的？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "logo源文件发我",
+            "彩色的话要矢量文件，AI或PDF格式"
+          ],
+          "botResponse": null,
+          "annotations": [
+            {
+              "dim": "E1",
+              "name": "Goal Completion",
+              "verdict": "pass",
+              "note": "Achieved: moq, price, lead_time, customization, artwork. Missed: packing."
+            }
+          ]
+        }
+      ],
+      "name_en": "Kraft Paper Bag"
+    },
+    {
+      "id": "#3",
+      "caseId": "mes-03-channel-switch",
+      "name": "真皮女包",
+      "displayName": "真皮女包",
+      "status": "replied",
+      "score": 6.5,
+      "max": 14,
+      "percent": 46.4,
+      "category": "escalation",
+      "dimensions": {
+        "E1": "fail",
+        "E2": "pass",
+        "E3": "partial",
+        "E4": "pass",
+        "E5": "fail",
+        "E6": "n/a",
+        "E7": "pass",
+        "E8": "partial",
+        "E9": "partial",
+        "E10": "n/a",
+        "E11": "n/a",
+        "E12": "partial",
+        "E13": "fail",
+        "E14": "fail"
+      },
+      "sr": {
+        "product": "真皮女包",
+        "quantity": "50",
+        "specs": "牛二层皮",
+        "customization": "去Logo",
+        "price": "¥60-95",
+        "product_en": "Genuine Leather Handbag",
+        "specs_en": "Split Leather",
+        "customization_en": "Remove Logo"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "去Logo",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 5
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的真皮女包，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "你好，在的"
+        },
+        {
+          "role": "supplier",
+          "content": "定制款的话线下走"
+        },
+        {
+          "role": "bot",
+          "content": "好的，我们先在1688上聊，方便留记录。请问50个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "定制无logo的单需要vx下单"
+        },
+        {
+          "role": "supplier",
+          "content": "AWJJ11688"
+        },
+        {
+          "role": "supplier",
+          "content": "加微信吧"
+        }
+      ],
+      "evalSummary": "Conversation stalled early due to supplier channel switch pressure; bot maintained platform stance but failed to recover or pursue alternative goals, leaving all 5 goals unachieved.",
+      "notes": "Supplier insists on WeChat twice. Should trigger escalation.",
+      "pipelineTrace": {
+        "goalCompletion": {
+          "tier1_goals": [
+            "moq",
+            "price",
+            "customization",
+            "lead_time"
+          ],
+          "tier1_achieved": [],
+          "tier1_missed": [
+            "moq",
+            "price",
+            "customization",
+            "lead_time"
+          ],
+          "tier2_goals": [
+            "packing"
+          ],
+          "tier2_achieved": [],
+          "tier2_missed": [
+            "packing"
+          ],
+          "total_goals": 5,
+          "total_achieved": 0,
+          "score": 0,
+          "verdict": "fail",
+          "notes": "Bot asked about MOQ and price but supplier did not answer either question. Supplier instead pushed for WeChat contact. Bot never acknowledged receipt of any data, and no goals were actually achieved. The '定制无logo' mention was supplier-initiated but bot did not acknowledge it as confirmation of the customization goal, and supplier was refusing 1688 order, not confirming feasibility."
+        },
+        "oneQuestion": {
+          "score": 1,
+          "violations": [],
+          "verdict": "pass",
+          "notes": "Each bot message contained at most one question."
+        },
+        "turnEfficiency": {
+          "score": 0.5,
+          "bot_messages": 2,
+          "goal_count": 5,
+          "budget": "5+2=7",
+          "wasted_turns": [],
+          "verdict": "partial",
+          "notes": "Only 2 bot messages used, well under budget. However, conversation ended prematurely with goals unachieved due to supplier channel switch pressure. Not a 'wasted turn' issue but an incomplete outcome."
+        },
+        "noHallucination": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass",
+          "notes": "No fabricated facts. Bot correctly noted '我们先在1688上聊，方便留记录' which is accurate to the platform."
+        },
+        "extractability": {
+          "score": 0,
+          "supplier_card": {
+            "moq": null,
+            "price": null,
+            "customization": null,
+            "lead_time": null,
+            "packing": null
+          },
+          "verdict": "fail",
+          "notes": "No usable data collected. Supplier refused to provide quotes on 1688 and insisted on WeChat. No numeric values, no confirmed specs, no packaging info."
+        },
+        "autoResponse": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a",
+          "notes": "No auto-responses detected. '你好，在的' appears to be human supplier response."
+        },
+        "naturalness": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass",
+          "notes": "Language is natural and appropriate. '我们先在1688上聊，方便留记录' is a competent buyer response to channel switch pressure. Tone matches human buyer behavior."
+        },
+        "rejectionRecovery": {
+          "score": 0.5,
+          "incidents": [
+            {
+              "supplier_rejection": "定制款的话线下走 / 定制无logo的单需要vx下单 / 加微信吧",
+              "bot_response": "好的，我们先在1688上聊，方便留记录。请问50个的单价多少？",
+              "assessment": "Bot acknowledged channel switch request but did not explore alternatives. Asked price again on 1688 without addressing supplier's refusal to quote there. Did not probe: minimum for 1688 order, whether customization possible on platform, price range even if approximate, or why WeChat required."
+            }
+          ],
+          "verdict": "partial",
+          "notes": "Bot pushed back on channel switch (good) but failed to explore alternatives when supplier doubled down. A competent buyer would ask '1688上不能报价吗？大概范围也可以' or '最少多少个可以1688下单？' or '如果不定制，现货什么价格？'"
+        },
+        "customization": {
+          "score": 0.5,
+          "sub_topics": [
+            {
+              "topic": "去Logo定制",
+              "status": "incomplete",
+              "notes": "Supplier mentioned '定制无logo的单需要vx下单' — indicating customization is possible but not on 1688. Bot did not acknowledge this, did not confirm feasibility, did not ask about MOQ/price differences for custom vs stock, did not provide logo file or confirm '去Logo' means removing existing logo vs no logo added."
+            }
+          ],
+          "verdict": "partial",
+          "notes": "Customization thread started by supplier but bot dropped it. No confirmation of feasibility, no spec exchange, no custom MOQ/price tracking."
+        },
+        "imageRead": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a",
+          "notes": "No images or files sent by supplier."
+        },
+        "imageSend": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a",
+          "notes": "No request for buyer to send files."
+        },
+        "escalation": {
+          "score": 0.5,
+          "signals": [
+            {
+              "event": "Supplier insists on WeChat channel switch (AWJJ11688)",
+              "conversation_bot_response": "好的，我们先在1688上聊，方便留记录。请问50个的单价多少？",
+              "assessment": "Bot continued conversation (good) but did not create clear signal for downstream escalation. The WeChat insistence is a clear escalation trigger — supplier refusing platform transaction. Conversation contains the signal but bot's handling was minimal."
+            }
+          ],
+          "verdict": "partial",
+          "notes": "Conversation bot correctly kept going, but the escalation signal (platform policy violation / channel switch pressure) is present and strong. Downstream system should detect this. However, bot could have surfaced more explicit signal by acknowledging the platform risk."
+        },
+        "scheduler": {
+          "score": 0,
+          "signals": [],
+          "timing_estimate": null,
+          "verdict": "fail",
+          "notes": "Supplier said '加微信吧' — no timing cue for follow-up. No scheduling judgment needed or made. However, conversation ended with no plan. Bot did not suggest '那我明天再联系' or extract any timing. This is a stall, not a schedule."
+        },
+        "negotiation": {
+          "attempted": false,
+          "note": "No price negotiation. Bot accepted no price was given and did not push for any pricing information, discounts, or volume references."
+        },
+        "continuation": {
+          "score": 0,
+          "events_handled": [
+            {
+              "event": "Supplier channel switch request (WeChat)",
+              "bot_response": "Deflected and asked price again",
+              "returned_to_goals": false,
+              "notes": "Bot asked price but supplier did not answer. Conversation effectively stalled. Bot did not pursue next goal (customization feasibility, lead time, packing) after price was ignored."
+            }
+          ],
+          "stalls": [
+            {
+              "turn": 4,
+              "issue": "After supplier refused 1688 price quote, bot repeated price question instead of pursuing other goals or exploring alternatives. Conversation ended with no goal progress."
+            }
+          ],
+          "verdict": "fail",
+          "notes": "Bot stopped pursuing meaningful goals after supplier's WeChat insistence. Did not ask about customization feasibility on 1688, lead time, packing, or stock alternatives. Effectively stalled despite sending one more message."
+        }
+      },
+      "supplierCard": {
+        "moq": null,
+        "price": null,
+        "customization": null,
+        "lead_time": null,
+        "packing": null
+      },
+      "coreScore": 6.5,
+      "coreMax": 14,
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的真皮女包，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "你好，在的",
+            "定制款的话线下走"
+          ],
+          "botResponse": "好的，我们先在1688上聊，方便留记录。请问50个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "定制无logo的单需要vx下单",
+            "AWJJ11688",
+            "加微信吧"
+          ],
+          "botResponse": null,
+          "annotations": [
+            {
+              "dim": "E12",
+              "name": "Escalation",
+              "verdict": "partial",
+              "note": "{\"event\": \"Supplier insists on WeChat channel switch (AWJJ11688)\", \"conversation_bot_response\": \"好的，"
+            },
+            {
+              "dim": "E1",
+              "name": "Goal Completion",
+              "verdict": "fail",
+              "note": "Achieved: . Missed: moq, price, customization, lead_time, packing."
+            }
+          ]
+        }
+      ],
+      "name_en": "Genuine Leather Handbag"
+    },
+    {
+      "id": "#4",
+      "caseId": "mes-04-timing-wait",
+      "name": "零钱包",
+      "displayName": "零钱包",
+      "status": "completed",
+      "score": 14,
+      "max": 14,
+      "percent": 100,
+      "category": "scheduler",
+      "dimensions": {
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "pass",
+        "E6": "n/a",
+        "E7": "pass",
+        "E8": "n/a",
+        "E9": "pass",
+        "E10": "n/a",
+        "E11": "pass",
+        "E12": "n/a",
+        "E13": "pass",
+        "E14": "pass"
+      },
+      "sr": {
+        "product": "零钱包",
+        "quantity": "1000",
+        "specs": "PU材质",
+        "customization": "印Logo",
+        "price": "¥3-6",
+        "product_en": "Coin Purse",
+        "specs_en": "PU Leather",
+        "customization_en": "Logo Printing"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "Logo定制",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "packing",
+          "name": "包装",
+          "tier": 2,
+          "priority": 5
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的零钱包，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "一个颜色至少1000"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问1000个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "3.8 一千起"
+        },
+        {
+          "role": "bot",
+          "content": "收到。请问可以印Logo吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "可以的"
+        },
+        {
+          "role": "supplier",
+          "content": "主要看你的设计图"
+        },
+        {
+          "role": "bot",
+          "content": "了解。设计稿在整理中。请问生产周期多久？"
+        },
+        {
+          "role": "supplier",
+          "content": "1000个差不多十天左右"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问外箱尺寸多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "稍等 让我问下"
+        }
+      ],
+      "evalSummary": "Clean, efficient sourcing conversation with all 5 goals achieved in 5 turns, natural Chinese business language, and competent handling of customization and file deferral.",
+      "notes": "Supplier said '稍等'. Bot should wait, not spam.",
+      "pipelineTrace": {
+        "goalCompletion": {
+          "tier1_goals": [
+            "moq",
+            "price",
+            "customization",
+            "lead_time"
+          ],
+          "tier1_achieved": [
+            "moq",
+            "price",
+            "customization",
+            "lead_time"
+          ],
+          "tier1_missed": [],
+          "tier2_goals": [
+            "packing"
+          ],
+          "tier2_achieved": [
+            "packing"
+          ],
+          "tier2_missed": [],
+          "total_goals": 5,
+          "total_achieved": 5,
+          "score": 1,
+          "verdict": "pass",
+          "notes": "All Tier 1 goals achieved: MOQ (1000/color), price (3.8), customization (confirmed feasible), lead_time (10 days). Tier 2 packing goal also achieved via '外箱尺寸' question. Supplier's '稍等 让我问下' indicates pending answer but bot did ask."
+        },
+        "oneQuestion": {
+          "score": 1,
+          "violations": [],
+          "verdict": "pass",
+          "notes": "Each bot message contains exactly one question: MOQ, price, customization feasibility, lead_time, packing. No compound questions or lists."
+        },
+        "turnEfficiency": {
+          "score": 1,
+          "bot_messages": 5,
+          "goal_count": 5,
+          "budget": "5+2=7",
+          "wasted_turns": [],
+          "verdict": "pass",
+          "notes": "5 bot messages for 5 goals, well under G+2=7 budget. No re-confirmations, no repetition, no unnecessary pleasantries beyond initial greeting. Conversation ends appropriately with supplier pending on packing info."
+        },
+        "noHallucination": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass",
+          "notes": "All facts traceable to supplier messages: MOQ '一个颜色至少1000', price '3.8 一千起', customization '可以的', lead_time '十天左右'. No fabricated specs or numbers."
+        },
+        "extractability": {
+          "score": 1,
+          "supplier_card": {
+            "moq": "1000个/颜色",
+            "price": "3.8元（1000起）",
+            "customization": "可以印Logo，需设计图",
+            "lead_time": "10天左右（1000个）",
+            "packing": "外箱尺寸待确认（供应商询问中）"
+          },
+          "verdict": "pass",
+          "notes": "All data points specific and numeric. Packing has pending status clearly noted. Could paste directly into comparison spreadsheet."
+        },
+        "autoResponse": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a",
+          "notes": "No digital customer service auto-replies or AI greetings detected in conversation."
+        },
+        "naturalness": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass",
+          "notes": "Natural Chinese business conversation. Appropriate transitions ('好的', '收到', '了解'). Matches supplier language. Smooth handling of '设计稿在整理中' deferral. No robotic markers."
+        },
+        "rejectionRecovery": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a",
+          "notes": "No rejections or pushbacks from supplier. All requests answered affirmatively."
+        },
+        "customization": {
+          "score": 1,
+          "sub_topics": [
+            "logo_feasibility",
+            "design_file_pending"
+          ],
+          "verdict": "pass",
+          "notes": "Bot asked about customization feasibility early (turn 3), got confirmation, handled supplier's request for design file with natural deferral ('设计稿在整理中'), and continued to next goal without abandoning thread. Tracked separately from standard MOQ/pricing."
+        },
+        "imageRead": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a",
+          "notes": "No images, files, or media tokens in conversation."
+        },
+        "imageSend": {
+          "score": 1,
+          "signals": [
+            "设计稿在整理中"
+          ],
+          "verdict": "pass",
+          "notes": "Supplier requested design file ('主要看你的设计图'). Bot responded naturally with commitment to prepare file without falsely claiming it was sent, and immediately continued to lead_time question. Correct send-side decision."
+        },
+        "escalation": {
+          "score": 1,
+          "signals": [],
+          "verdict": "n/a",
+          "notes": "No escalation-worthy conditions: no channel switch requests, no contradictory requirements, no supplier refusal on core product, no authority violations. Conversation bot continued normally throughout."
+        },
+        "scheduler": {
+          "score": 1,
+          "signals": [
+            "稍等 让我问下"
+          ],
+          "timing_estimate": {
+            "delayHours": 4,
+            "rawPhrase": "稍等 让我问下",
+            "confidence": "medium"
+          },
+          "verdict": "pass",
+          "notes": "Supplier indicated need to check on packing info ('稍等 让我问下'). Bot appropriately did not spam, conversation ended with clear pending state. Timing estimate ~4 hours based on typical '稍等' response patterns."
+        },
+        "negotiation": {
+          "attempted": false,
+          "note": "Bot accepted first price (3.8) without negotiation attempt. No volume discount inquiry, no competitor reference, no 'best price' question."
+        },
+        "continuation": {
+          "score": 1,
+          "events_handled": [
+            {
+              "event": "file_request_from_supplier",
+              "response": "deferred naturally, continued to lead_time"
+            }
+          ],
+          "stalls": [],
+          "verdict": "pass",
+          "notes": "Bot handled file request event inline without stopping goal pursuit. Immediately asked lead_time after deferring design file, then packing. Never derailed."
+        }
+      },
+      "supplierCard": {
+        "moq": "1000个/颜色",
+        "price": "3.8元（1000起）",
+        "customization": "可以印Logo，需设计图",
+        "lead_time": "10天左右（1000个）",
+        "packing": "外箱尺寸待确认（供应商询问中）"
+      },
+      "coreScore": 14,
+      "coreMax": 14,
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的零钱包，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "一个颜色至少1000"
+          ],
+          "botResponse": "好的。请问1000个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "3.8 一千起"
+          ],
+          "botResponse": "收到。请问可以印Logo吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "可以的",
+            "主要看你的设计图"
+          ],
+          "botResponse": "了解。设计稿在整理中。请问生产周期多久？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "1000个差不多十天左右"
+          ],
+          "botResponse": "好的。请问外箱尺寸多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 5,
+          "type": "exchange",
+          "supplierInputs": [
+            "稍等 让我问下"
+          ],
+          "botResponse": null,
+          "annotations": [
+            {
+              "dim": "E1",
+              "name": "Goal Completion",
+              "verdict": "pass",
+              "note": "All achieved: moq, price, customization, lead_time, packing."
+            }
+          ]
+        }
+      ],
+      "name_en": "Coin Purse"
+    },
+    {
+      "id": "#5",
+      "caseId": "mes-05-mixed-all",
+      "name": "定制棒球帽",
+      "displayName": "定制棒球帽",
+      "status": "completed",
+      "score": 12.5,
+      "max": 14,
+      "percent": 89.3,
+      "category": "mixed",
+      "dimensions": {
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "pass",
+        "E6": "n/a",
+        "E7": "pass",
+        "E8": "partial",
+        "E9": "pass",
+        "E10": "pass",
+        "E11": "partial",
+        "E12": "pass",
+        "E13": "n/a",
+        "E14": "partial"
+      },
+      "sr": {
+        "product": "定制棒球帽",
+        "quantity": "200",
+        "specs": "纯棉网眼",
+        "customization": "刺绣Logo",
+        "price": "¥8-15",
+        "product_en": "Custom Baseball Cap",
+        "specs_en": "Cotton Mesh",
+        "customization_en": "Logo Embroidery"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "刺绣定制",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "artwork",
+          "name": "设计稿要求",
+          "tier": 2,
+          "priority": 5
+        },
+        {
+          "id": "sample",
+          "name": "样品",
+          "tier": 2,
+          "priority": 6
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的棒球帽，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "100个起"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问200个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "刺绣的话要看图案"
+        },
+        {
+          "role": "supplier",
+          "content": "[图片] jpg 1920x1080 245000B"
+        },
+        {
+          "role": "supplier",
+          "content": "这是我们做过的样品"
+        },
+        {
+          "role": "bot",
+          "content": "收到，看到了。我们的Logo大概是单色刺绣，请问单价怎么算？"
+        },
+        {
+          "role": "supplier",
+          "content": "单色刺绣200个的话12元一个"
+        },
+        {
+          "role": "bot",
+          "content": "了解。请问生产周期多久？"
+        },
+        {
+          "role": "supplier",
+          "content": "7天左右"
+        },
+        {
+          "role": "bot",
+          "content": "好的。刺绣需要什么格式的文件？"
+        },
+        {
+          "role": "supplier",
+          "content": "发设计稿过来"
+        },
+        {
+          "role": "supplier",
+          "content": "加微信吧 方便发文件"
+        },
+        {
+          "role": "supplier",
+          "content": "13958742000"
+        }
+      ],
+      "evalSummary": "Solid execution on Tier 1 goals and customization handling, but missed sample goal and ended abruptly when supplier pushed for WeChat channel switch, failing to deflect or wrap up cleanly.",
+      "notes": "Multi-dimension: image received (E10), file send needed (E11), channel switch (E12).",
+      "pipelineTrace": {
+        "goalCompletion": {
+          "tier1_goals": [
+            "moq",
+            "price",
+            "customization",
+            "lead_time"
+          ],
+          "tier1_achieved": [
+            "moq",
+            "price",
+            "customization",
+            "lead_time"
+          ],
+          "tier1_missed": [],
+          "tier2_goals": [
+            "artwork",
+            "sample"
+          ],
+          "tier2_achieved": [
+            "artwork"
+          ],
+          "tier2_missed": [
+            "sample"
+          ],
+          "total_goals": 6,
+          "total_achieved": 5,
+          "score": 1,
+          "verdict": "pass",
+          "notes": "All Tier 1 goals achieved. Tier 2: artwork achieved (asked about file format, got '发设计稿过来'), sample missed (never asked). 75% of Tier 2 achieved (1/2 = 50%, but with 4 Tier 1 goals, the threshold is all Tier 1 + 75% Tier 2; since only 1 Tier 2 goal exists in the achievable set, this is borderline. Actually re-reading: 1 of 2 Tier 2 = 50%, which is <75%. However, scoring rule says 'Partial: All Tier 1 goals achieved but <75% Tier 2'. But with only 2 Tier 2 goals, 1/2 = 50% < 75%, so should be Partial. Wait - re-checking: the rule is 'Pass: All Tier 1 goals achieved + at least 75% of Tier 2 goals achieved'. 1/2 = 50% < 75%. This should be Partial. However, sample goal became moot when supplier pushed to WeChat for file transfer - the bot was blocked on artwork file transfer. Given the channel switch attempt, pursuing sample would be difficult. Re-evaluating: the 'sample' goal was genuinely missed - bot never asked about sampling. This is a clear miss. Verdict: Partial."
+        },
+        "oneQuestion": {
+          "score": 1,
+          "violations": [],
+          "verdict": "pass"
+        },
+        "turnEfficiency": {
+          "score": 1,
+          "bot_messages": 5,
+          "goal_count": 6,
+          "budget": "6+2=8",
+          "wasted_turns": [],
+          "verdict": "pass"
+        },
+        "noHallucination": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass"
+        },
+        "extractability": {
+          "score": 1,
+          "supplier_card": {
+            "moq": "100个",
+            "price_200_units": "12元/个 (单色刺绣)",
+            "customization": "单色刺绣可行",
+            "lead_time": "7天左右",
+            "artwork_format": "设计稿（未指定具体格式，需发送）"
+          },
+          "verdict": "pass"
+        },
+        "autoResponse": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "naturalness": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass"
+        },
+        "rejectionRecovery": {
+          "score": 0.5,
+          "incidents": [
+            {
+              "supplier_rejection": "加微信吧 方便发文件 / 13958742000",
+              "bot_response": "None - conversation ended",
+              "assessment": "Supplier pushed for channel switch to WeChat. Bot did not get a chance to respond (conversation ended). This is a partial because the rejection occurred at the end and bot didn't handle it, but also didn't inappropriately accept."
+            }
+          ],
+          "verdict": "partial"
+        },
+        "customization": {
+          "score": 1,
+          "sub_topics": [
+            "刺绣可行性确认",
+            "单色刺绣定价",
+            "设计稿格式要求"
+          ],
+          "verdict": "pass"
+        },
+        "imageRead": {
+          "score": 1,
+          "incidents": [
+            {
+              "event": "[图片] jpg 1920x1080 245000B - 样品图片",
+              "bot_response": "收到，看到了。我们的Logo大概是单色刺绣，请问单价怎么算？",
+              "assessment": "Correctly acknowledged and immediately proceeded to next goal (pricing with customization context)"
+            }
+          ],
+          "verdict": "pass"
+        },
+        "imageSend": {
+          "score": 0.5,
+          "signals": [
+            {
+              "supplier_request": "发设计稿过来",
+              "bot_response": "None - conversation ended before bot could respond",
+              "assessment": "Supplier explicitly asked for design file. Bot didn't get to respond. The conversation ended here, so we cannot evaluate the send decision. However, the supplier then pushed for WeChat, creating a channel switch scenario. Given the conversation ended, this is Partial - we don't see the bot's handling."
+            }
+          ],
+          "verdict": "partial"
+        },
+        "escalation": {
+          "score": 1,
+          "signals": [
+            {
+              "event": "Supplier insisted on WeChat channel switch: '加微信吧 方便发文件 13958742000'",
+              "conversation_bot_behavior": "Conversation ended - no stop for escalation",
+              "escalation_signal_present": "Clear channel switch attempt captured in conversation for downstream detection"
+            }
+          ],
+          "verdict": "pass"
+        },
+        "scheduler": {
+          "score": 1,
+          "signals": [],
+          "timing_estimate": null,
+          "verdict": "n/a"
+        },
+        "negotiation": {
+          "attempted": false,
+          "note": "Bot accepted first price quote (12元) without any negotiation attempt. No questions about volume discount, competitor pricing, or 'best price' inquiry."
+        },
+        "continuation": {
+          "score": 0.5,
+          "events_handled": [
+            {
+              "event": "Image received",
+              "response": "Acknowledged and continued to pricing question - good"
+            },
+            {
+              "event": "Channel switch request (WeChat)",
+              "response": "Conversation ended - bot did not continue or wrap up goals"
+            }
+          ],
+          "stalls": [
+            {
+              "stall_point": "Final turn - supplier requested WeChat, bot did not respond",
+              "remaining_goals": [
+                "sample"
+              ],
+              "assessment": "Conversation terminated without handling the channel switch or pursuing remaining Tier 2 goal (sample). Bot should have either deflected and asked about sample, or wrapped up with clear status."
+            }
+          ],
+          "verdict": "partial"
+        }
+      },
+      "supplierCard": {
+        "moq": "100个",
+        "price_200_units": "12元/个 (单色刺绣)",
+        "customization": "单色刺绣可行",
+        "lead_time": "7天左右",
+        "artwork_format": "设计稿（未指定具体格式，需发送）"
+      },
+      "coreScore": 12.5,
+      "coreMax": 14,
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的棒球帽，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "100个起"
+          ],
+          "botResponse": "好的。请问200个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "刺绣的话要看图案",
+            "[图片] jpg 1920x1080 245000B",
+            "这是我们做过的样品"
+          ],
+          "botResponse": "收到，看到了。我们的Logo大概是单色刺绣，请问单价怎么算？",
+          "annotations": [
+            {
+              "dim": "E10",
+              "name": "Image Read",
+              "verdict": "pass",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "单色刺绣200个的话12元一个"
+          ],
+          "botResponse": "了解。请问生产周期多久？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "7天左右"
+          ],
+          "botResponse": "好的。刺绣需要什么格式的文件？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 5,
+          "type": "exchange",
+          "supplierInputs": [
+            "发设计稿过来",
+            "加微信吧 方便发文件",
+            "13958742000"
+          ],
+          "botResponse": null,
+          "annotations": [
+            {
+              "dim": "E12",
+              "name": "Escalation",
+              "verdict": "pass",
+              "note": "{\"event\": \"Supplier insisted on WeChat channel switch: '加微信吧 方便发文件 13958742000'\", \"conversation_bot_"
+            },
+            {
+              "dim": "E1",
+              "name": "Goal Completion",
+              "verdict": "pass",
+              "note": "Achieved: moq, price, customization, lead_time, artwork. Missed: sample."
+            }
+          ]
+        }
+      ],
+      "name_en": "Custom Baseball Cap"
+    },
+    {
+      "id": "#6",
+      "caseId": "mes-06-auto-reply-timing",
+      "name": "甘蔗浆餐盒",
+      "displayName": "甘蔗浆餐盒",
+      "status": "stalled",
+      "score": 5.5,
+      "max": 14,
+      "percent": 39.3,
+      "category": "scheduler",
+      "dimensions": {
+        "E1": "fail",
+        "E2": "pass",
+        "E3": "partial",
+        "E4": "pass",
+        "E5": "fail",
+        "E6": "n/a",
+        "E7": "partial",
+        "E8": "partial",
+        "E9": "n/a",
+        "E10": "n/a",
+        "E11": "n/a",
+        "E12": "n/a",
+        "E13": "partial",
+        "E14": "partial"
+      },
+      "sr": {
+        "product": "甘蔗浆餐盒",
+        "quantity": "18000",
+        "specs": "1500ml单格带纸盖",
+        "customization": "None",
+        "price": "¥1-2",
+        "product_en": "Sugarcane Pulp Lunch Box",
+        "specs_en": "1500ml Single Compartment with Paper Lid",
+        "customization_en": "None"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "lead_time",
+          "name": "交期",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "packing",
+          "name": "包装尺寸",
+          "tier": 1,
+          "priority": 4
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的甘蔗浆餐盒，想了解一下。请问1500ml单格有吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "您好，在的，亲亲，有什么可以帮到您的呢？"
+        },
+        {
+          "role": "bot",
+          "content": "你好，想了解下这个产品"
+        },
+        {
+          "role": "supplier",
+          "content": "嗯"
+        },
+        {
+          "role": "supplier",
+          "content": "1500ml的没有"
+        },
+        {
+          "role": "supplier",
+          "content": "最大1300的"
+        },
+        {
+          "role": "bot",
+          "content": "好的，那1300ml的18000个单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "我核算下"
+        },
+        {
+          "role": "supplier",
+          "content": "等一下哈"
+        }
+      ],
+      "evalSummary": "Conversation stalled early: zero goals achieved, bot wasted a turn on redundant greeting, and failed to continue after supplier's delay cue. Product spec changed without buyer confirmation tracking.",
+      "notes": "Supplier is calculating. Bot must wait, not spam.",
+      "pipelineTrace": {
+        "goalCompletion": {
+          "tier1_goals": [
+            "moq",
+            "price",
+            "lead_time",
+            "packing"
+          ],
+          "tier1_achieved": [],
+          "tier1_missed": [
+            "moq",
+            "price",
+            "lead_time",
+            "packing"
+          ],
+          "tier2_goals": [],
+          "tier2_achieved": [],
+          "tier2_missed": [],
+          "total_goals": 4,
+          "total_achieved": 0,
+          "score": 0,
+          "verdict": "fail",
+          "notes": "Bot asked about price for 1300ml (not the original 1500ml spec), but supplier only said '我核算下/等一下哈' — no price was actually provided. No MOQ, lead_time, or packing data collected. The 1500ml product was confirmed unavailable, but bot did not acknowledge this as a blocker or explore alternatives systematically. No goals achieved per 'bot must ask' rule — asking alone doesn't count; supplier must provide data and bot must acknowledge receipt."
+        },
+        "oneQuestion": {
+          "score": 1,
+          "violations": [],
+          "verdict": "pass",
+          "notes": "Each bot message contains at most one question: msg1 '请问1500ml单格有吗？', msg3 '想了解下这个产品' (statement), msg6 '1300ml的18000个单价多少？' — all single questions."
+        },
+        "turnEfficiency": {
+          "score": 0.5,
+          "bot_messages": 3,
+          "goal_count": 4,
+          "budget": "4+2=6",
+          "wasted_turns": [
+            "msg3: '你好，想了解下这个产品' — redundant greeting after supplier already responded to msg1, no new information or progress toward goals"
+          ],
+          "verdict": "partial",
+          "notes": "3 bot messages within G+2=6 budget, but msg3 was wasted — repeated greeting without advancing goals. Bot also continued after learning 1500ml unavailable without clear pivot strategy."
+        },
+        "noHallucination": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass",
+          "notes": "No fabricated facts. Bot correctly reported supplier's '1500ml的没有/最大1300的'. No false claims about prices, MOQs, or specs."
+        },
+        "extractability": {
+          "score": 0,
+          "supplier_card": {
+            "product": "1300ml甘蔗浆餐盒（1500ml unavailable）",
+            "moq": null,
+            "price": null,
+            "lead_time": null,
+            "packing": null,
+            "notes": "Supplier calculating price, no data received"
+          },
+          "verdict": "fail",
+          "notes": "Zero usable numeric data. Price pending supplier calculation. No MOQ, lead time, or packing info. Product spec changed from SR (1500ml→1300ml) without explicit buyer approval tracking."
+        },
+        "autoResponse": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a",
+          "notes": "No auto-responses detected. Supplier messages appear human."
+        },
+        "naturalness": {
+          "score": 0.5,
+          "issues": [
+            "msg3 '你好，想了解下这个产品' is awkward — supplier already engaged, this restarts the conversation unnaturally",
+            "No smooth handling of the 1500ml→1300ml spec change — competent buyer would acknowledge the change and confirm if 1300ml is acceptable before proceeding"
+          ],
+          "verdict": "partial",
+          "notes": "Language is simple and polite but msg3 is robotic/inefficient. Bot lacks flexibility in handling product unavailability — doesn't confirm buyer's flexibility on spec change."
+        },
+        "rejectionRecovery": {
+          "score": 0.5,
+          "incidents": [
+            {
+              "supplier_rejection": "1500ml的没有/最大1300的",
+              "bot_response": "好的，那1300ml的18000个单价多少？",
+              "assessment": "Bot acknowledged rejection and pivoted to alternative, but did not explore whether 1300ml meets buyer needs or what the implications are. Single alternative offered without probing depth (MOQ differences, lead time impact, etc.)"
+            }
+          ],
+          "verdict": "partial",
+          "notes": "Bot pivoted to 1300ml but minimally — didn't ask if 1300ml is acceptable given original 1500ml SR, didn't explore other alternatives (other suppliers, custom mold, different quantity). Acceptable but not thorough recovery."
+        },
+        "customization": {
+          "score": 1,
+          "sub_topics": [],
+          "verdict": "n/a",
+          "notes": "SR explicitly states 'Customization: None'. No customization handling required."
+        },
+        "imageRead": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a",
+          "notes": "No images or files received from supplier."
+        },
+        "imageSend": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a",
+          "notes": "No request from supplier for buyer to send files/images."
+        },
+        "escalation": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a",
+          "notes": "No escalation-worthy conditions. Supplier said '等一下哈' for price calculation — normal delay, not escalation trigger."
+        },
+        "scheduler": {
+          "score": 0.5,
+          "signals": [
+            "Supplier: '我核算下/等一下哈' — indicates need to wait for price"
+          ],
+          "timing_estimate": {
+            "delayHours": 2,
+            "rawPhrase": "等一下哈",
+            "confidence": "low"
+          },
+          "verdict": "partial",
+          "notes": "Supplier indicated need to wait ('等一下哈'), but bot did not extract or commit to a follow-up timing. '等一下' is vague — could be minutes or hours. Bot should have asked '大概多久？' or proposed '那我2小时后联系您'. No explicit scheduling decision made."
+        },
+        "negotiation": {
+          "attempted": false,
+          "note": "No price received yet, so no negotiation possible. Bot accepted supplier's pivot to 1300ml without questioning price implications or asking '这是最优价吗？'"
+        },
+        "continuation": {
+          "score": 0.5,
+          "events_handled": [
+            {
+              "event": "Product unavailability (1500ml)",
+              "response": "Pivoted to 1300ml and asked price",
+              "assessment": "Continued goal pursuit but with spec change"
+            },
+            {
+              "event": "Supplier delay ('等一下哈')",
+              "response": "Conversation ended — no follow-up scheduled, no continuation",
+              "assessment": "Bot stopped; should have either waited inline with timing estimate or scheduled follow-up"
+            }
+          ],
+          "stalls": [
+            "Supplier said '等一下哈' and conversation ended without bot scheduling next step or confirming when to follow up — goal pursuit suspended"
+          ],
+          "verdict": "partial",
+          "notes": "Bot handled product unavailability by pivoting, but failed to continue after supplier delay cue. Conversation stalled at '等一下哈' — no next goal pursued, no follow-up timing established. Bot should have asked next goal (MOQ, lead_time, packing) while waiting, or confirmed follow-up timing."
+        }
+      },
+      "supplierCard": {
+        "product": "1300ml甘蔗浆餐盒（1500ml unavailable）",
+        "moq": null,
+        "price": null,
+        "lead_time": null,
+        "packing": null,
+        "notes": "Supplier calculating price, no data received"
+      },
+      "coreScore": 5.5,
+      "coreMax": 14,
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的甘蔗浆餐盒，想了解一下。请问1500ml单格有吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "您好，在的，亲亲，有什么可以帮到您的呢？"
+          ],
+          "botResponse": "你好，想了解下这个产品",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "嗯",
+            "1500ml的没有",
+            "最大1300的"
+          ],
+          "botResponse": "好的，那1300ml的18000个单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "我核算下",
+            "等一下哈"
+          ],
+          "botResponse": null,
+          "annotations": [
+            {
+              "dim": "E1",
+              "name": "Goal Completion",
+              "verdict": "fail",
+              "note": "Achieved: . Missed: moq, price, lead_time, packing."
+            }
+          ]
+        }
+      ],
+      "name_en": "Sugarcane Pulp Lunch Box"
+    },
+    {
+      "id": "#7",
+      "caseId": "mes-07-image-plus-send",
+      "name": "连帽卫衣",
+      "displayName": "连帽卫衣",
+      "status": "completed",
+      "score": 11.5,
+      "max": 14,
+      "percent": 82.1,
+      "category": "mixed",
+      "dimensions": {
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "partial",
+        "E6": "n/a",
+        "E7": "pass",
+        "E8": "n/a",
+        "E9": "partial",
+        "E10": "partial",
+        "E11": "n/a",
+        "E12": "n/a",
+        "E13": "n/a",
+        "E14": "partial"
+      },
+      "sr": {
+        "product": "连帽卫衣",
+        "quantity": "50",
+        "specs": "纯棉300克拉链",
+        "customization": "丝印Logo",
+        "price": "¥50-65",
+        "product_en": "Hoodie",
+        "specs_en": "100% Cotton 300gsm Zipper",
+        "customization_en": "Silk Screen Logo"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "印Logo",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "artwork",
+          "name": "设计稿要求",
+          "tier": 2,
+          "priority": 5
+        },
+        {
+          "id": "packing",
+          "name": "包装",
+          "tier": 2,
+          "priority": 6
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的连帽卫衣，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "一件起订"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问50件的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "57元一件"
+        },
+        {
+          "role": "bot",
+          "content": "收到。请问可以印Logo吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "可以的"
+        },
+        {
+          "role": "supplier",
+          "content": "2种工艺可以选，丝印版费50 印一色+3.5 烫画是+5"
+        },
+        {
+          "role": "bot",
+          "content": "了解。请问生产周期多久？"
+        },
+        {
+          "role": "supplier",
+          "content": "2到3天可以完成"
+        },
+        {
+          "role": "bot",
+          "content": "好的。需要什么格式的设计图？"
+        },
+        {
+          "role": "supplier",
+          "content": "您大概要印的图有么"
+        },
+        {
+          "role": "supplier",
+          "content": "[图片] jpg 800x600 95000B"
+        },
+        {
+          "role": "supplier",
+          "content": "像这种效果"
+        }
+      ],
+      "evalSummary": "Solid Tier 1 completion with natural single-question discipline, but stalled after receiving supplier's artwork example image, leaving packing goal unaddressed and showing weakness in image handling and conversation continuation.",
+      "notes": "Supplier showed sample image (E10) and asks for buyer design (E11).",
+      "pipelineTrace": {
+        "goalCompletion": {
+          "tier1_goals": [
+            "moq",
+            "price",
+            "customization",
+            "lead_time"
+          ],
+          "tier1_achieved": [
+            "moq",
+            "price",
+            "customization",
+            "lead_time"
+          ],
+          "tier1_missed": [],
+          "tier2_goals": [
+            "artwork",
+            "packing"
+          ],
+          "tier2_achieved": [
+            "artwork"
+          ],
+          "tier2_missed": [
+            "packing"
+          ],
+          "total_goals": 6,
+          "total_achieved": 5,
+          "score": 1,
+          "verdict": "pass",
+          "notes": "All Tier 1 goals achieved. Tier 2: artwork achieved (asked about design format, got response with example image), packing missed (never asked). 1/2 Tier 2 = 50%, which is <75%, but all Tier 1 complete so Pass per rubric (All Tier 1 goals achieved + Tier 2 partial is Pass boundary). Actually re-reading: Pass requires 75% Tier 2, Partial is <75% Tier 2. With 50% Tier 2, this should be Partial. But rubric says 'All Tier 1 goals achieved but <75% Tier 2' = Partial. Correcting: this is Partial."
+        },
+        "oneQuestion": {
+          "score": 1,
+          "violations": [],
+          "verdict": "pass"
+        },
+        "turnEfficiency": {
+          "score": 1,
+          "bot_messages": 4,
+          "goal_count": 6,
+          "budget": "6+2=8",
+          "wasted_turns": [],
+          "verdict": "pass"
+        },
+        "noHallucination": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass"
+        },
+        "extractability": {
+          "score": 0.5,
+          "supplier_card": {
+            "moq": "1件",
+            "price_50pcs": "57元/件",
+            "customization": "丝印: 版费50元, 印一色+3.5元; 烫画+5元",
+            "lead_time": "2-3天",
+            "artwork_format": "jpg 800x600 (example provided)",
+            "packing": null
+          },
+          "verdict": "partial"
+        },
+        "autoResponse": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "naturalness": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass"
+        },
+        "rejectionRecovery": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "customization": {
+          "score": 0.5,
+          "sub_topics": [
+            {
+              "topic": "customization_feasibility",
+              "status": "achieved"
+            },
+            {
+              "topic": "custom_pricing",
+              "status": "achieved"
+            },
+            {
+              "topic": "artwork_specs",
+              "status": "partial"
+            }
+          ],
+          "verdict": "partial"
+        },
+        "imageRead": {
+          "score": 0.5,
+          "incidents": [
+            {
+              "turn": 9,
+              "media": "[图片] jpg 800x600 95000B",
+              "bot_response": "NONE - conversation ends",
+              "issue": "Bot never acknowledged the image or continued after receiving it. The supplier sent image as example of artwork format, but bot did not respond at all. Conversation appears truncated or bot stalled."
+            }
+          ],
+          "verdict": "partial"
+        },
+        "imageSend": {
+          "score": 1,
+          "signals": [],
+          "verdict": "n/a"
+        },
+        "escalation": {
+          "score": 1,
+          "signals": [],
+          "verdict": "n/a"
+        },
+        "scheduler": {
+          "score": 1,
+          "signals": [],
+          "timing_estimate": null,
+          "verdict": "n/a"
+        },
+        "negotiation": {
+          "attempted": false,
+          "note": "No negotiation attempt. Accepted first price of 57元 without asking for volume discount or better price."
+        },
+        "continuation": {
+          "score": 0.5,
+          "events_handled": [
+            {
+              "event": "image_received",
+              "turn": 9,
+              "response": "none - conversation ends"
+            }
+          ],
+          "stalls": [
+            "Image received at turn 9, no bot response, packing goal unaddressed"
+          ],
+          "verdict": "partial"
+        }
+      },
+      "supplierCard": {
+        "moq": "1件",
+        "price_50pcs": "57元/件",
+        "customization": "丝印: 版费50元, 印一色+3.5元; 烫画+5元",
+        "lead_time": "2-3天",
+        "artwork_format": "jpg 800x600 (example provided)",
+        "packing": null
+      },
+      "coreScore": 11.5,
+      "coreMax": 14,
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的连帽卫衣，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "一件起订"
+          ],
+          "botResponse": "好的。请问50件的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "57元一件"
+          ],
+          "botResponse": "收到。请问可以印Logo吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "可以的",
+            "2种工艺可以选，丝印版费50 印一色+3.5 烫画是+5"
+          ],
+          "botResponse": "了解。请问生产周期多久？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "2到3天可以完成"
+          ],
+          "botResponse": "好的。需要什么格式的设计图？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 5,
+          "type": "exchange",
+          "supplierInputs": [
+            "您大概要印的图有么",
+            "[图片] jpg 800x600 95000B",
+            "像这种效果"
+          ],
+          "botResponse": null,
+          "annotations": [
+            {
+              "dim": "E10",
+              "name": "Image Read",
+              "verdict": "partial",
+              "note": "Bot never acknowledged the image or continued after receiving it. The supplier sent image as example of artwork format, but bot did not respond at all. Conversation appears truncated or bot stalled."
+            },
+            {
+              "dim": "E1",
+              "name": "Goal Completion",
+              "verdict": "pass",
+              "note": "Achieved: moq, price, customization, lead_time, artwork. Missed: packing."
+            }
+          ]
+        }
+      ],
+      "name_en": "Hoodie"
+    },
+    {
+      "id": "#8",
+      "caseId": "mes-08-regression-baseline",
+      "name": "金属徽章",
+      "displayName": "金属徽章",
+      "status": "completed",
+      "score": 13.5,
+      "max": 14,
+      "percent": 96.4,
+      "category": "baseline",
+      "dimensions": {
+        "E1": "pass",
+        "E2": "pass",
+        "E3": "pass",
+        "E4": "pass",
+        "E5": "pass",
+        "E6": "n/a",
+        "E7": "pass",
+        "E8": "n/a",
+        "E9": "partial",
+        "E10": "n/a",
+        "E11": "n/a",
+        "E12": "n/a",
+        "E13": "n/a",
+        "E14": "n/a"
+      },
+      "sr": {
+        "product": "金属徽章",
+        "quantity": "100",
+        "specs": "锌合金3x7cm珐琅",
+        "customization": "定制图案",
+        "price": "¥5-12",
+        "product_en": "Metal Badge",
+        "specs_en": "Zinc Alloy 3x7cm Enamel",
+        "customization_en": "Custom Design"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "material_spec",
+          "name": "材质",
+          "tier": 1,
+          "priority": 4
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的金属徽章，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "100个起"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问100个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "模具费800，单价预估9元"
+        },
+        {
+          "role": "bot",
+          "content": "了解。生产周期多久？"
+        },
+        {
+          "role": "supplier",
+          "content": "工期12-15天"
+        },
+        {
+          "role": "bot",
+          "content": "收到。用什么材质的？"
+        },
+        {
+          "role": "supplier",
+          "content": "锌合金"
+        },
+        {
+          "role": "bot",
+          "content": "好的，信息都记录了，谢谢！有需要再联系。"
+        }
+      ],
+      "evalSummary": "Clean, efficient conversation achieving all 4 goals in 5 turns with natural Chinese dialogue, but missed exploring the customization requirement (custom design specs, logo file needs) despite it being in the SR.",
+      "notes": "Regression baseline. All E10-E14 should be N/A. E1-E9 should pass cleanly.",
+      "pipelineTrace": {
+        "goalCompletion": {
+          "tier1_goals": [
+            "moq",
+            "price",
+            "lead_time",
+            "material_spec"
+          ],
+          "tier1_achieved": [
+            "moq",
+            "price",
+            "lead_time",
+            "material_spec"
+          ],
+          "tier1_missed": [],
+          "tier2_goals": [],
+          "tier2_achieved": [],
+          "tier2_missed": [],
+          "total_goals": 4,
+          "total_achieved": 4,
+          "score": 1,
+          "verdict": "pass",
+          "notes": "All 4 Tier 1 goals achieved. Bot explicitly asked each question and received answers: MOQ=100, price=模具费800+单价9元, lead_time=12-15天, material=锌合金. No Tier 2 goals in this SR."
+        },
+        "oneQuestion": {
+          "score": 1,
+          "violations": [],
+          "verdict": "pass"
+        },
+        "turnEfficiency": {
+          "score": 1,
+          "bot_messages": 5,
+          "goal_count": 4,
+          "budget": "4+2=6",
+          "wasted_turns": [],
+          "verdict": "pass"
+        },
+        "noHallucination": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass"
+        },
+        "extractability": {
+          "score": 1,
+          "supplier_card": {
+            "moq": "100个",
+            "price": "模具费800元，单价9元",
+            "lead_time": "12-15天",
+            "material_spec": "锌合金"
+          },
+          "verdict": "pass"
+        },
+        "autoResponse": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "naturalness": {
+          "score": 1,
+          "issues": [],
+          "verdict": "pass"
+        },
+        "rejectionRecovery": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "customization": {
+          "score": 0.5,
+          "sub_topics": [
+            "custom_design"
+          ],
+          "verdict": "partial"
+        },
+        "imageRead": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "imageSend": {
+          "score": 1,
+          "incidents": [],
+          "verdict": "n/a"
+        },
+        "escalation": {
+          "score": 1,
+          "signals": [],
+          "verdict": "n/a"
+        },
+        "scheduler": {
+          "score": 1,
+          "signals": [],
+          "timing_estimate": null,
+          "verdict": "n/a"
+        },
+        "negotiation": {
+          "attempted": false,
+          "note": "Bot accepted first price quote (模具费800+单价9元) without any negotiation attempt. No questions about volume discounts, competitor pricing, or price flexibility."
+        },
+        "continuation": {
+          "score": 1,
+          "events_handled": [],
+          "stalls": [],
+          "verdict": "n/a"
+        }
+      },
+      "supplierCard": {
+        "moq": "100个",
+        "price": "模具费800元，单价9元",
+        "lead_time": "12-15天",
+        "material_spec": "锌合金"
+      },
+      "coreScore": 13.5,
+      "coreMax": 14,
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的金属徽章，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "100个起"
+          ],
+          "botResponse": "好的。请问100个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "模具费800，单价预估9元"
+          ],
+          "botResponse": "了解。生产周期多久？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "工期12-15天"
+          ],
+          "botResponse": "收到。用什么材质的？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "锌合金"
+          ],
+          "botResponse": "好的，信息都记录了，谢谢！有需要再联系。",
+          "annotations": [
+            {
+              "dim": "E1",
+              "name": "Goal Completion",
+              "verdict": "pass",
+              "note": "All achieved: moq, price, lead_time, material_spec."
+            }
+          ]
+        }
+      ],
+      "name_en": "Metal Badge"
+    },
+    {
+      "id": "#9",
+      "caseId": "mes2-01-moq-rejection",
+      "name": "PU圆形小圆包",
+      "displayName": "PU圆形小圆包 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "escalation",
+      "dimensions": {},
+      "sr": {
+        "product": "PU圆形小圆包",
+        "quantity": "50",
+        "specs": "PU材质, 18cm直径",
+        "customization": "胶标Logo",
+        "price": "¥25-35",
+        "product_en": "PU Round Bag",
+        "specs_en": "PU Leather, 18cm Diameter",
+        "customization_en": "Rubber Logo"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "胶标Logo",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 5
+        },
+        {
+          "id": "sample",
+          "name": "样品",
+          "tier": 2,
+          "priority": 6
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的PU小圆包，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "300起"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问50个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "50个的话27.5"
+        },
+        {
+          "role": "bot",
+          "content": "收到。请问你们能做胶标吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "这么少，做不了"
+        },
+        {
+          "role": "bot",
+          "content": "加一点价格的话呢？"
+        },
+        {
+          "role": "supplier",
+          "content": "要不你们提供给我们？"
+        },
+        {
+          "role": "supplier",
+          "content": "然后周期也比较长， 都一个礼拜才能拿到货"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Real MOQ/customization blocker from 常箱伴皮具. Supplier refuses custom label at this quantity but offers an alternative (buyer provides labels). Bot should: (1) acknowledge the blocker, (2) note the alternative, (3) continue pursuing lead_time/packing/sample goals. Summary agent should flag: customization blocked at qty 50, supplier offers buyer-supplied labels as alternative. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的PU小圆包，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "300起"
+          ],
+          "botResponse": "好的。请问50个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "50个的话27.5"
+          ],
+          "botResponse": "收到。请问你们能做胶标吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "这么少，做不了"
+          ],
+          "botResponse": "加一点价格的话呢？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "要不你们提供给我们？",
+            "然后周期也比较长， 都一个礼拜才能拿到货"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "PU Round Bag"
+    },
+    {
+      "id": "#10",
+      "caseId": "mes2-03-moq-escalation-deep",
+      "name": "零钱包",
+      "displayName": "零钱包 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "escalation",
+      "dimensions": {},
+      "sr": {
+        "product": "零钱包",
+        "quantity": "300",
+        "specs": "PU材质锁扣设计",
+        "customization": "正面小标Logo",
+        "price": "¥5-10",
+        "product_en": "Coin Purse",
+        "specs_en": "PU Leather with Clasp",
+        "customization_en": "Small Logo on Front"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "正面Logo定制",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 5
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的零钱包，想了解一下。请问可以印Logo吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "可以的，我们支持定制logo。"
+        },
+        {
+          "role": "supplier",
+          "content": "这个logo要做哪？"
+        },
+        {
+          "role": "supplier",
+          "content": "也就只有正面这一点位置，小标那里"
+        },
+        {
+          "role": "bot",
+          "content": "就把原本那个部分换掉，可以吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "可以的，我们可以在正面小标位置更换logo。"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问300个价格多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "数量太少了，不定制"
+        },
+        {
+          "role": "bot",
+          "content": "起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "我们家最低起订量是500个，一个颜色起订。"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Real MOQ negotiation from zero-purse supplier. Customization confirmed but quantity rejected. Bot should: (1) note MOQ is 500 vs SR's 300, (2) ask about pricing at 500, (3) continue to lead_time and packing. Summary agent should flag: MOQ 500 vs requested 300, needs buyer/brain to decide whether to increase quantity or find another supplier. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的零钱包，想了解一下。请问可以印Logo吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "可以的，我们支持定制logo。",
+            "这个logo要做哪？",
+            "也就只有正面这一点位置，小标那里"
+          ],
+          "botResponse": "就把原本那个部分换掉，可以吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "可以的，我们可以在正面小标位置更换logo。"
+          ],
+          "botResponse": "好的。请问300个价格多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "数量太少了，不定制"
+          ],
+          "botResponse": "起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "我们家最低起订量是500个，一个颜色起订。"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "Coin Purse"
+    },
+    {
+      "id": "#11",
+      "caseId": "mes2-04-authority-boundary",
+      "name": "定制手表",
+      "displayName": "定制手表 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "baseline",
+      "dimensions": {},
+      "sr": {
+        "product": "定制手表",
+        "quantity": "100",
+        "specs": "不锈钢表壳, 石英机芯",
+        "customization": "品牌Logo刻印",
+        "price": "¥75-120",
+        "product_en": "Custom Watch",
+        "specs_en": "Stainless Steel Case, Quartz Movement",
+        "customization_en": "Brand Logo Engraving"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "品牌Logo",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "material_spec",
+          "name": "材质确认",
+          "tier": 2,
+          "priority": 5
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的不锈钢手表，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "100个起"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问100个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "看款式，75-120之间"
+        },
+        {
+          "role": "bot",
+          "content": "收到。请问可以定制我们的品牌Logo吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "需要提供HAKI这个的品牌注册证书给我们才可以定制生产"
+        },
+        {
+          "role": "supplier",
+          "content": "没有的话就没办法定制"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Text-only blocker control. Real authority boundary from 腾旺手表. Supplier requires a brand certificate that the bot does not have. This is kept as a baseline control because it is pure text and lets us compare blocker extraction without any media or scheduler noise. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的不锈钢手表，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "100个起"
+          ],
+          "botResponse": "好的。请问100个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "看款式，75-120之间"
+          ],
+          "botResponse": "收到。请问可以定制我们的品牌Logo吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "需要提供HAKI这个的品牌注册证书给我们才可以定制生产",
+            "没有的话就没办法定制"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "Custom Watch"
+    },
+    {
+      "id": "#12",
+      "caseId": "mes2-05-image-burst",
+      "name": "不锈钢保温杯",
+      "displayName": "不锈钢保温杯 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "media_read",
+      "dimensions": {},
+      "sr": {
+        "product": "不锈钢保温杯",
+        "quantity": "500",
+        "specs": "304不锈钢, 500ml",
+        "customization": "印Logo",
+        "price": "¥25-35",
+        "product_en": "Stainless Steel Tumbler",
+        "specs_en": "304 Stainless Steel, 500ml",
+        "customization_en": "Logo Printing"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "customization",
+          "name": "Logo定制",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "sample",
+          "name": "样品",
+          "tier": 2,
+          "priority": 5
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 6
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的不锈钢保温杯，想了解一下。请问最小起订量是多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "你好，最低100个起"
+        },
+        {
+          "role": "bot",
+          "content": "收到。请问500个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "500个的话28一个"
+        },
+        {
+          "role": "bot",
+          "content": "好的，了解。请问生产周期大概多久？"
+        },
+        {
+          "role": "supplier",
+          "content": "一般7-10天"
+        },
+        {
+          "role": "supplier",
+          "content": "[图片] jpg 3024x4032 4634313B"
+        },
+        {
+          "role": "supplier",
+          "content": "[图片] jpg 1920x1080 119760B"
+        },
+        {
+          "role": "supplier",
+          "content": "[图片] jpg 1499x1500 159757B"
+        },
+        {
+          "role": "supplier",
+          "content": "这是我们的产品图和包装图"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Image-burst read case rooted in real DB media rows (2063/2064). Bot should acknowledge once, avoid hallucinating details, and continue to the next missing goal. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的不锈钢保温杯，想了解一下。请问最小起订量是多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "你好，最低100个起"
+          ],
+          "botResponse": "收到。请问500个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "500个的话28一个"
+          ],
+          "botResponse": "好的，了解。请问生产周期大概多久？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "一般7-10天",
+            "[图片] jpg 3024x4032 4634313B",
+            "[图片] jpg 1920x1080 119760B",
+            "[图片] jpg 1499x1500 159757B",
+            "这是我们的产品图和包装图"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "Stainless Steel Tumbler"
+    },
+    {
+      "id": "#13",
+      "caseId": "mes2-06-file-request",
+      "name": "白牛皮纸袋",
+      "displayName": "白牛皮纸袋 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "media_send",
+      "dimensions": {},
+      "sr": {
+        "product": "白牛皮纸袋",
+        "quantity": "1000",
+        "specs": "21x18cm, 白牛皮纸",
+        "customization": "彩色Logo印刷",
+        "price": "¥0.5-1.5",
+        "product_en": "White Kraft Paper Bag",
+        "specs_en": "21x18cm, White Kraft Paper",
+        "customization_en": "Color Logo Printing"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "customization",
+          "name": "Logo印刷",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "artwork",
+          "name": "设计稿要求",
+          "tier": 2,
+          "priority": 5
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 6
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的白牛皮纸袋，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "你好亲，3000个起定制"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问1000个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "1000个的话0.85元"
+        },
+        {
+          "role": "bot",
+          "content": "收到。可以帮我们印Logo吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "logo源文件发我"
+        },
+        {
+          "role": "bot",
+          "content": "Logo文件在整理中。请问需要什么格式？"
+        },
+        {
+          "role": "supplier",
+          "content": "给源文件哦"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Primary media-send case from 皓茁环保科技 — verbatim 'logo源文件发我' and '给源文件哦'. Bot should acknowledge naturally, avoid lying that the file was sent, and keep the conversation moving. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的白牛皮纸袋，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "你好亲，3000个起定制"
+          ],
+          "botResponse": "好的。请问1000个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "1000个的话0.85元"
+          ],
+          "botResponse": "收到。可以帮我们印Logo吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "logo源文件发我"
+          ],
+          "botResponse": "Logo文件在整理中。请问需要什么格式？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "给源文件哦"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "White Kraft Paper Bag"
+    },
+    {
+      "id": "#14",
+      "caseId": "mes2-07-timing-calculating",
+      "name": "甘蔗浆餐盒",
+      "displayName": "甘蔗浆餐盒 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "scheduler",
+      "dimensions": {},
+      "sr": {
+        "product": "甘蔗浆餐盒",
+        "quantity": "18000",
+        "specs": "1300ml单格带纸盖",
+        "customization": "None",
+        "price": "¥0.8-1.5",
+        "product_en": "Sugarcane Pulp Lunch Box",
+        "specs_en": "1300ml Single Compartment with Paper Lid",
+        "customization_en": "None"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "lead_time",
+          "name": "交期",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "packing",
+          "name": "包装尺寸",
+          "tier": 1,
+          "priority": 4
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的甘蔗浆餐盒，想了解一下。请问1300ml单格有吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "您好，稍等"
+        },
+        {
+          "role": "supplier",
+          "content": "亲亲稍等 这边看一下哈"
+        },
+        {
+          "role": "supplier",
+          "content": "亲亲 能拍下的就是有货的哈 具体以页面上显示的为准哈"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问18000个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "我核算下"
+        },
+        {
+          "role": "supplier",
+          "content": "等一下哈"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Scheduler case rooted in real timing phrases — '稍等', '亲亲稍等 这边看一下哈', '我核算下', '等一下哈'. Bot should wait, not spam, and preserve a sensible next step. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的甘蔗浆餐盒，想了解一下。请问1300ml单格有吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "您好，稍等",
+            "亲亲稍等 这边看一下哈",
+            "亲亲 能拍下的就是有货的哈 具体以页面上显示的为准哈"
+          ],
+          "botResponse": "好的。请问18000个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "我核算下",
+            "等一下哈"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "Sugarcane Pulp Lunch Box"
+    },
+    {
+      "id": "#15",
+      "caseId": "mes2-08-timing-tomorrow",
+      "name": "PU斜挎包",
+      "displayName": "PU斜挎包 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "scheduler",
+      "dimensions": {},
+      "sr": {
+        "product": "PU斜挎包",
+        "quantity": "100",
+        "specs": "PU材质, 配肩带扣",
+        "customization": "定制五金扣",
+        "price": "¥25-40",
+        "product_en": "PU Crossbody Bag",
+        "specs_en": "PU Leather, with Shoulder Strap Buckle",
+        "customization_en": "Custom Hardware"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "五金定制",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 5
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的PU斜挎包，想了解一下。请问肩带旁边能加上一个扣吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "我看看"
+        },
+        {
+          "role": "bot",
+          "content": "好的"
+        },
+        {
+          "role": "supplier",
+          "content": "可以做，但是时间会比较久"
+        },
+        {
+          "role": "bot",
+          "content": "大概多久呀？"
+        },
+        {
+          "role": "supplier",
+          "content": "等会哈"
+        },
+        {
+          "role": "supplier",
+          "content": "五金要一模一样的吗"
+        },
+        {
+          "role": "bot",
+          "content": "不需要，可以看看你有什么选择"
+        },
+        {
+          "role": "supplier",
+          "content": "明天出去找一下五金，看一下"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Scheduler case rooted in a real next-day deferral from 胜大皮具1688 — verbatim '等会哈' and '明天出去找一下五金，看一下'. Summary agent should extract an approximately 24-hour follow-up window. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的PU斜挎包，想了解一下。请问肩带旁边能加上一个扣吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "我看看"
+          ],
+          "botResponse": "好的",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "可以做，但是时间会比较久"
+          ],
+          "botResponse": "大概多久呀？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "等会哈",
+            "五金要一模一样的吗"
+          ],
+          "botResponse": "不需要，可以看看你有什么选择",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "明天出去找一下五金，看一下"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "PU Crossbody Bag"
+    },
+    {
+      "id": "#16",
+      "caseId": "mes2-09-image-read-then-file-send",
+      "name": "定制马克杯",
+      "displayName": "定制马克杯 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "media_read",
+      "dimensions": {},
+      "sr": {
+        "product": "定制马克杯",
+        "quantity": "200",
+        "specs": "陶瓷350ml",
+        "customization": "双面印Logo",
+        "price": "¥8-15",
+        "product_en": "Custom Mug",
+        "specs_en": "Ceramic 350ml",
+        "customization_en": "Double-sided Logo Printing"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "双面印Logo",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "artwork",
+          "name": "设计稿要求",
+          "tier": 2,
+          "priority": 5
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 6
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的马克杯，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "50个起"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问200个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "200个的话12元"
+        },
+        {
+          "role": "bot",
+          "content": "收到。可以双面印Logo吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "嗯嗯"
+        },
+        {
+          "role": "supplier",
+          "content": "有logo源文件吗，可以出效果图哦"
+        },
+        {
+          "role": "supplier",
+          "content": "[图片] jpg 1920x1080 119760B"
+        },
+        {
+          "role": "supplier",
+          "content": "这是之前客户做过的效果"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Second media-read case. Combined real patterns: '有logo源文件吗，可以出效果图哦' from wzzzkj2022:林清 plus a real image token shape. Bot should acknowledge the sample image first, then handle the file ask naturally. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的马克杯，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "50个起"
+          ],
+          "botResponse": "好的。请问200个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "200个的话12元"
+          ],
+          "botResponse": "收到。可以双面印Logo吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "嗯嗯",
+            "有logo源文件吗，可以出效果图哦",
+            "[图片] jpg 1920x1080 119760B",
+            "这是之前客户做过的效果"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "Custom Mug"
+    },
+    {
+      "id": "#17",
+      "caseId": "mes2-10-logo-mockup-request",
+      "name": "定制腕表",
+      "displayName": "定制腕表 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "media_send",
+      "dimensions": {},
+      "sr": {
+        "product": "定制腕表",
+        "quantity": "200",
+        "specs": "石英机芯, 不锈钢表壳",
+        "customization": "表盘Logo",
+        "price": "¥70-110",
+        "product_en": "Custom Wristwatch",
+        "specs_en": "Quartz Movement, Stainless Steel Case",
+        "customization_en": "Dial Logo"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "表盘Logo定制",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "artwork",
+          "name": "设计稿要求",
+          "tier": 2,
+          "priority": 5
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的腕表，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "200个起"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问200个大概什么价格？"
+        },
+        {
+          "role": "supplier",
+          "content": "要看你们定制要求，常规大概80-100"
+        },
+        {
+          "role": "bot",
+          "content": "收到。表盘上可以做我们的Logo吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "可以的"
+        },
+        {
+          "role": "supplier",
+          "content": "你可以先把logo发下呢，这边让美工做下效果图你看看"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Second media-send case rooted in a real watch-supplier phrase. Bot should avoid pretending the logo has already been sent, answer naturally, and keep collecting lead-time or artwork requirement details. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的腕表，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "200个起"
+          ],
+          "botResponse": "好的。请问200个大概什么价格？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "要看你们定制要求，常规大概80-100"
+          ],
+          "botResponse": "收到。表盘上可以做我们的Logo吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "可以的",
+            "你可以先把logo发下呢，这边让美工做下效果图你看看"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "Custom Wristwatch"
+    },
+    {
+      "id": "#18",
+      "caseId": "mes2-11-regression-baseline",
+      "name": "金属徽章",
+      "displayName": "金属徽章 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "baseline",
+      "dimensions": {},
+      "sr": {
+        "product": "金属徽章",
+        "quantity": "100",
+        "specs": "锌合金3x7cm珐琅",
+        "customization": "定制图案",
+        "price": "¥5-12",
+        "product_en": "Metal Badge",
+        "specs_en": "Zinc Alloy 3x7cm Enamel",
+        "customization_en": "Custom Design"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "material_spec",
+          "name": "材质",
+          "tier": 1,
+          "priority": 4
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的金属徽章，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "100个起"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问100个的单价多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "模具费800，单价预估9元"
+        },
+        {
+          "role": "bot",
+          "content": "了解。生产周期多久？"
+        },
+        {
+          "role": "supplier",
+          "content": "工期12-15天"
+        },
+        {
+          "role": "bot",
+          "content": "收到。用什么材质的？"
+        },
+        {
+          "role": "supplier",
+          "content": "锌合金"
+        },
+        {
+          "role": "bot",
+          "content": "好的，信息都记录了，谢谢！有需要再联系。"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Clean regression baseline from a real koihardware conversation. All E10-E14 should be N/A and E1-E9 should score cleanly. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的金属徽章，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "100个起"
+          ],
+          "botResponse": "好的。请问100个的单价多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "模具费800，单价预估9元"
+          ],
+          "botResponse": "了解。生产周期多久？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "工期12-15天"
+          ],
+          "botResponse": "收到。用什么材质的？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "锌合金"
+          ],
+          "botResponse": "好的，信息都记录了，谢谢！有需要再联系。",
+          "annotations": []
+        }
+      ],
+      "name_en": "Metal Badge"
+    },
+    {
+      "id": "#19",
+      "caseId": "mes2-12-supplier-silence",
+      "name": "不锈钢水壶",
+      "displayName": "不锈钢水壶 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "scheduler",
+      "dimensions": {},
+      "sr": {
+        "product": "不锈钢水壶",
+        "quantity": "500",
+        "specs": "304不锈钢, 1.5L",
+        "customization": "印Logo",
+        "price": "¥18-30",
+        "product_en": "Stainless Steel Kettle",
+        "specs_en": "304 Stainless Steel, 1.5L",
+        "customization_en": "Logo Printing"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "Logo印刷",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 5
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的不锈钢水壶，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "[系统消息] 客服离线中，请留言我们将尽快回复您"
+        },
+        {
+          "role": "bot",
+          "content": "好的，方便时请回复。想了解500个的价格。"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Complete supplier silence case — no human reply at all, only a platform auto-message. Tests: (1) E6 auto-response handling — bot should recognize the system message as non-human, (2) E13 scheduler — summary agent should detect silence and recommend a follow-up, (3) E14 continuation — bot should not loop or spam. Expected status: no_reply. Critical gap-fill case: zero cases tested this before. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的不锈钢水壶，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "[系统消息] 客服离线中，请留言我们将尽快回复您"
+          ],
+          "botResponse": "好的，方便时请回复。想了解500个的价格。",
+          "annotations": []
+        }
+      ],
+      "name_en": "Stainless Steel Kettle"
+    },
+    {
+      "id": "#20",
+      "caseId": "mes2-13-auto-response-loop",
+      "name": "PU手提包",
+      "displayName": "PU手提包 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "auto_response",
+      "dimensions": {},
+      "sr": {
+        "product": "PU手提包",
+        "quantity": "200",
+        "specs": "PU材质, 25x20cm",
+        "customization": "定制内衬",
+        "price": "¥20-35",
+        "product_en": "PU Tote Bag",
+        "specs_en": "PU Leather, 25x20cm",
+        "customization_en": "Custom Lining"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "customization",
+          "name": "定制内衬",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "lead_time",
+          "name": "生产周期",
+          "tier": 1,
+          "priority": 4
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 5
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的PU手提包，想了解一下。请问最小起订量多少？"
+        },
+        {
+          "role": "supplier",
+          "content": "🌹🌹欢迎光临本店，新客户下单享95折优惠哦"
+        },
+        {
+          "role": "bot",
+          "content": "你好，请问有人在吗？想了解一下起订量。"
+        },
+        {
+          "role": "supplier",
+          "content": "您好呀～有什么可以帮您的吗？是想了解我们的商品还是服务呢？😊"
+        },
+        {
+          "role": "bot",
+          "content": "想了解手提包的起订量和价格。"
+        },
+        {
+          "role": "supplier",
+          "content": "100个起，200个的话28元"
+        },
+        {
+          "role": "bot",
+          "content": "好的。可以做定制内衬吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "可以的，内衬换棉绒加3元"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "Auto-response loop case from real 胜大皮具1688 patterns — first two supplier turns are 数字客服回复 (🌹🌹 greeting + 您好呀 template). Human takes over from turn 3 with real answers. Tests: (1) E6 — bot must not treat auto-replies as real data, must not extract pricing or MOQ from auto-responses, (2) E14 — bot should continue pursuing goals after auto-phase ends, (3) E7 — bot should not become robotic when facing auto-replies. The auto-then-human transition is the key test. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的PU手提包，想了解一下。请问最小起订量多少？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "🌹🌹欢迎光临本店，新客户下单享95折优惠哦"
+          ],
+          "botResponse": "你好，请问有人在吗？想了解一下起订量。",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "您好呀～有什么可以帮您的吗？是想了解我们的商品还是服务呢？😊"
+          ],
+          "botResponse": "想了解手提包的起订量和价格。",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "100个起，200个的话28元"
+          ],
+          "botResponse": "好的。可以做定制内衬吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "可以的，内衬换棉绒加3元"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "PU Tote Bag"
+    },
+    {
+      "id": "#21",
+      "caseId": "mes2-14-wechat-redirect",
+      "name": "婴儿健身架",
+      "displayName": "婴儿健身架 (v2)",
+      "status": "pending",
+      "score": 0,
+      "max": 14,
+      "percent": 0,
+      "category": "escalation",
+      "dimensions": {},
+      "sr": {
+        "product": "婴儿健身架",
+        "quantity": "60",
+        "specs": "带爬爬垫, 亚马逊款",
+        "customization": "None",
+        "price": "¥40-55",
+        "product_en": "Baby Gym",
+        "specs_en": "With Play Mat, Amazon Style",
+        "customization_en": "None"
+      },
+      "goals": [
+        {
+          "id": "moq",
+          "name": "最小起订量",
+          "tier": 1,
+          "priority": 1
+        },
+        {
+          "id": "price",
+          "name": "单价",
+          "tier": 1,
+          "priority": 2
+        },
+        {
+          "id": "lead_time",
+          "name": "交期",
+          "tier": 1,
+          "priority": 3
+        },
+        {
+          "id": "packing",
+          "name": "包装方式",
+          "tier": 2,
+          "priority": 4
+        }
+      ],
+      "transcript": [
+        {
+          "role": "bot",
+          "content": "你好，看到你们的婴儿健身架，想了解一下。请问有现货吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "您好，稍等"
+        },
+        {
+          "role": "supplier",
+          "content": "有一款现货的"
+        },
+        {
+          "role": "bot",
+          "content": "好的。请问60个什么价格？"
+        },
+        {
+          "role": "supplier",
+          "content": "you could add my wechat 135 8553 0707"
+        },
+        {
+          "role": "bot",
+          "content": "不好意思，暂时不方便加微信。可以在这里聊吗？"
+        },
+        {
+          "role": "supplier",
+          "content": "60个的话48元"
+        },
+        {
+          "role": "bot",
+          "content": "收到。请问交期多久？"
+        },
+        {
+          "role": "supplier",
+          "content": "现货3-5天发"
+        }
+      ],
+      "evalSummary": "",
+      "notes": "WeChat redirect case from real 上海思环 conversation — verbatim 'you could add my wechat 135 8553 0707'. Bot should: (1) deflect the WeChat request politely and continue on 1688, (2) not follow the redirect, (3) keep pursuing goals after deflection. Tests E12 (escalation — wechat redirect is a signal the summary agent should emit at low severity), E14 (continuation — bot must not stop after the redirect request). Expected detectStatus: wechat_redirect with number '13585530707'. [v2 - not yet scored]",
+      "pipelineTrace": {},
+      "supplierCard": {},
+      "turns": [
+        {
+          "turnIndex": 0,
+          "type": "bot_opening",
+          "supplierInputs": [],
+          "botResponse": "你好，看到你们的婴儿健身架，想了解一下。请问有现货吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 1,
+          "type": "exchange",
+          "supplierInputs": [
+            "您好，稍等",
+            "有一款现货的"
+          ],
+          "botResponse": "好的。请问60个什么价格？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 2,
+          "type": "exchange",
+          "supplierInputs": [
+            "you could add my wechat 135 8553 0707"
+          ],
+          "botResponse": "不好意思，暂时不方便加微信。可以在这里聊吗？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 3,
+          "type": "exchange",
+          "supplierInputs": [
+            "60个的话48元"
+          ],
+          "botResponse": "收到。请问交期多久？",
+          "annotations": []
+        },
+        {
+          "turnIndex": 4,
+          "type": "exchange",
+          "supplierInputs": [
+            "现货3-5天发"
+          ],
+          "botResponse": null,
+          "annotations": []
+        }
+      ],
+      "name_en": "Baby Gym"
+    }
+  ],
+  "goals": [
+    {
+      "id": "moq",
+      "name": "最小起订量",
+      "tier": 1,
+      "field": "product_variants.moq",
+      "question_cn": "请问最低起订量是多少？",
+      "name_en": "MOQ",
+      "question_en": "What is the MOQ?"
+    },
+    {
+      "id": "price",
+      "name": "单价",
+      "tier": 1,
+      "field": "product_variants.unit_price",
+      "question_cn": "单价多少？可以报个价吗？",
+      "name_en": "Price",
+      "question_en": "What is the price? Can I get a quote?"
+    },
+    {
+      "id": "lead_time",
+      "name": "交期",
+      "tier": 1,
+      "field": "product_variants.lead_time",
+      "question_cn": "交期大概多久？",
+      "name_en": "Lead Time",
+      "question_en": "What is the lead time?"
+    },
+    {
+      "id": "sample",
+      "name": "样品条款",
+      "tier": 1,
+      "field": "sample.terms",
+      "question_cn": "可以寄样品吗？费用怎么算？",
+      "name_en": "Sample",
+      "question_en": "Can I get a sample? What are the costs?"
+    },
+    {
+      "id": "customization",
+      "name": "定制",
+      "tier": 1,
+      "field": "product_variants.customization",
+      "question_cn": "可以定制Logo吗？",
+      "name_en": "Customization",
+      "question_en": "Can I customize the logo?"
+    },
+    {
+      "id": "packaging",
+      "name": "包装",
+      "tier": 2,
+      "field": "packaging.description",
+      "question_cn": "包装方式是怎样的？",
+      "name_en": "Packaging",
+      "question_en": "What is the packaging?"
+    },
+    {
+      "id": "certification",
+      "name": "认证",
+      "tier": 2,
+      "field": "certification.type",
+      "question_cn": "有什么认证吗？",
+      "name_en": "Certification",
+      "question_en": "What certifications do you have?"
+    },
+    {
+      "id": "material",
+      "name": "材质",
+      "tier": 2,
+      "field": "material.spec",
+      "question_cn": "材质是什么？",
+      "name_en": "Material",
+      "question_en": "What is the material?"
+    },
+    {
+      "id": "mold_cost",
+      "name": "模具费",
+      "tier": 2,
+      "field": "tooling.cost",
+      "question_cn": "需要开模吗？模具费多少？",
+      "name_en": "Mold Cost",
+      "question_en": "Is a mold needed? What is the mold cost?"
+    }
+  ],
+  "nelsonBaseline": {
+    "label": "Nelson Bot (Baseline)",
+    "totalConversations": 399,
+    "avgScore": 88.3,
+    "funnel": {
+      "completed": {
+        "count": 195,
+        "percent": 49
+      },
+      "replied": {
+        "count": 172,
+        "percent": 43
+      },
+      "messaged": {
+        "count": 20,
+        "percent": 5
+      },
+      "stalled": {
+        "count": 12,
+        "percent": 3
+      }
+    },
+    "scoreDistribution": [
+      {
+        "band": "90-100%",
+        "count": 66
+      },
+      {
+        "band": "80-89%",
+        "count": 10
+      },
+      {
+        "band": "70-79%",
+        "count": 4
+      },
+      {
+        "band": "60-69%",
+        "count": 4
+      },
+      {
+        "band": "<60%",
+        "count": 13
+      }
+    ]
+  },
+  "benchmark": {
+    "currentSR": "SR-3937",
+    "currentAvg": 75.9,
+    "passCount": 5,
+    "caseCount": 8,
+    "passThreshold": 75,
+    "prompt": "dyn-v3",
+    "judge": "kimi",
+    "runAt": "2026-03-31T15:20:57.742Z"
+  }
+}

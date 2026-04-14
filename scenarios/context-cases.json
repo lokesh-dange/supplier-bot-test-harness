@@ -1,0 +1,114 @@
+[
+  {
+    "version": 1,
+    "id": "context-cross-supplier-internal-anchor",
+    "title": "Cross-supplier internal benchmark without naming competitor in outbound text",
+    "harnessDemo": {
+      "trackerRows": [
+        7,
+        6,
+        8
+      ],
+      "proves": [
+        "contextText + seeded bot note flow into inputsView for operator inspection",
+        "Supplier commercial follow-up still runs through normal per-turn pipeline"
+      ],
+      "doesNotProve": [
+        "Model never leaks competitor identity under adversarial probing",
+        "Automated grounding that Supplier B quote is still valid"
+      ]
+    },
+    "contextText": "Internal-only: Supplier B quoted USD 1.18/pc at 1000 MOQ for comparable spec last week. Do not disclose Supplier B name or link in outbound messages.",
+    "sr": {
+      "product": "Stainless steel vacuum bottle 500ml",
+      "quantity": "1000",
+      "specs": "powder coat, laser logo",
+      "customization": "single logo",
+      "price": "target USD 3.9"
+    },
+    "goals": [
+      {
+        "tier": "must",
+        "text": "Beat internal benchmark without naming the peer supplier."
+      }
+    ],
+    "initialHistory": [
+      {
+        "role": "system",
+        "content": "[harness] cross-supplier context probe: internal benchmark is for operator visibility only."
+      },
+      {
+        "role": "bot",
+        "content": "Can you match USD 3.9 at 1000pcs with powder coat + laser logo as described?"
+      }
+    ],
+    "sequence": [
+      {
+        "type": "message",
+        "role": "supplier",
+        "content": "Best I can do today is USD 4.05 — can you move if we include spare lids?"
+      }
+    ],
+    "options": {
+      "runConversationEnd": true,
+      "livePipeline": false
+    }
+  },
+  {
+    "version": 1,
+    "id": "goalgen-explicit-goals-array",
+    "title": "Explicit tiered goals array passes through harness inputs",
+    "harnessDemo": {
+      "trackerRows": [
+        3,
+        6,
+        8
+      ],
+      "proves": [
+        "inputsView.goals mirrors scenario JSON for wiring review"
+      ],
+      "doesNotProve": [
+        "Production goal-generator quality",
+        "Live SR parsing beyond this stub SR"
+      ]
+    },
+    "sr": {
+      "product": "Bluetooth desk speaker",
+      "quantity": "600",
+      "specs": "USB-C, 10W, fabric wrap",
+      "customization": "deboss logo",
+      "price": "target USD 14.5"
+    },
+    "goals": [
+      {
+        "tier": "must",
+        "text": "Confirm factory has BIS/CE certs on file before locking PO."
+      },
+      {
+        "tier": "nice",
+        "text": "Offer colorways beyond black/white without MOQ jump."
+      }
+    ],
+    "initialHistory": [
+      {
+        "role": "system",
+        "content": "[harness] goal-gen wiring probe: goals array is authored explicitly for export inspection."
+      },
+      {
+        "role": "bot",
+        "content": "Please confirm MOQ/lead for 600pcs with deboss logo as spec sheet v3."
+      }
+    ],
+    "sequence": [
+      {
+        "type": "message",
+        "role": "supplier",
+        "content": "MOQ 600 ok — 25 day lead. Certs available after PI."
+      }
+    ],
+    "options": {
+      "runConversationEnd": true,
+      "livePipeline": false
+    }
+  }
+]

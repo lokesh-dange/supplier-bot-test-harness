@@ -1,0 +1,56 @@
+[
+  {
+    "version": 1,
+    "id": "escalation-logo-asset-request",
+    "title": "Supplier requests logo/Pantone files — escalation / human assist",
+    "harnessDemo": {
+      "trackerRows": [
+        12,
+        6,
+        8
+      ],
+      "proves": [
+        "Supplier asset request shows in transcript",
+        "Harness emits stub tools + summary envelope for operator review"
+      ],
+      "doesNotProve": [
+        "Real brain receiveSignals delivery",
+        "Automatic human queue assignment in production"
+      ]
+    },
+    "sr": {
+      "product": "Custom enamel mug",
+      "quantity": "2000",
+      "specs": "Pantone 186C logo, double side",
+      "customization": "2D vector + physical sample",
+      "price": "target USD 2.8"
+    },
+    "goals": [
+      {
+        "tier": "must",
+        "text": "Obtain production-ready logo assets without inventing files."
+      }
+    ],
+    "initialHistory": [
+      {
+        "role": "system",
+        "content": "[harness] escalation-oriented probe: supplier asks for files the bot must not fabricate."
+      },
+      {
+        "role": "bot",
+        "content": "Thanks — please confirm you can hit USD 2.8 at 2000pcs with Pantone 186C on both sides."
+      }
+    ],
+    "sequence": [
+      {
+        "type": "message",
+        "role": "supplier",
+        "content": "Please share your vector logo AI + PDF and Pantone swatch photo so we can set printing film today."
+      }
+    ],
+    "options": {
+      "runConversationEnd": true,
+      "livePipeline": false
+    }
+  }
+]

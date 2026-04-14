@@ -1,0 +1,49 @@
+[
+  {
+    "schemaVersion": "harness-scenario/1",
+    "interpretation": {
+      "schedulerTriggerSemantics": "Agreed boundary: Eric-side emits scheduler/follow-up tool signals; Sourcy executes cron triggers (~30m cadence mentioned in action_items notes). Exact trigger-time send vs defer vs silent is meeting-noted as LLM-judged — not fully closed.",
+      "noOverclaim": "These fixtures are replay/simulation aids; they do not prove production multimodal or live supplier behavior."
+    },
+    "id": "media-product-detail-266217",
+    "family": "media",
+    "title": "Supplier sends product/detail photos (jpg/png) for sizing/spec follow-ups",
+    "tags": [
+      "media",
+      "product-detail",
+      "image"
+    ],
+    "provenance": {
+      "fixtureData": "real:lokesh-sheet",
+      "scenarioLogic": "hand-authored:wiring",
+      "sheetUrl": "https://docs.google.com/spreadsheets/d/1sImRTL93Rw6x_0EdTafh2BOc0c78-TSPlUo71Sx5sls/edit",
+      "conversation_id": "266217"
+    },
+    "harness": {
+      "mode": "conversation_replay",
+      "fixturePath": "fixtures/conversation-threads.sample.json",
+      "conversationId": "266217",
+      "injectMediaAs": "messages[].images",
+      "focus": "Exercise multimodal/detail interpretation on repeated product imagery turns."
+    },
+    "expectations": {
+      "minSupplierTurnsWithImages": 1
+    },
+    "harnessDemo": {
+      "trackerRows": [
+        6,
+        10,
+        11
+      ],
+      "proves": [
+        "Real Lokesh sheet URLs hydrate transcript + mediaIndex for operator-visible media plumbing",
+        "Conversation replay preserves supplier-side ordering for demo"
+      ],
+      "doesNotProve": [
+        "Which prompt revision (tracker rows 5–6) is wired — not asserted by this harness",
+        "True multimodal vision / pixel grounding in simulated mode",
+        "Outbound attachment send via chatServer"
+      ]
+    }
+  }
+]

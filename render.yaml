@@ -1,0 +1,15 @@
+# Blueprint for deploying this folder as the service root (standalone copy or
+# Render "Root Directory" = this folder inside a larger repo).
+#
+# Bind: set SOURCY_HARNESS_HOST=0.0.0.0 (this blueprint does) so the service accepts platform traffic.
+
+services:
+  - type: web
+    name: sourcy-supplier-test-harness
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: SOURCY_HARNESS_HOST
+        value: 0.0.0.0

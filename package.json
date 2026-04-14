@@ -1,0 +1,16 @@
+{
+  "name": "sourcy-supplier-test-harness",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first Node harness + UI for supplier-bot scenario replay (simulated or optional live export).",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/harness-server.mjs",
+    "check": "node server/check-runtime.mjs && node server/check-ui.mjs",
+    "check:runtime": "node server/check-runtime.mjs",
+    "check:ui": "node server/check-ui.mjs"
+  }
+}

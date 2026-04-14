@@ -1,0 +1,51 @@
+[
+  {
+    "schemaVersion": "harness-scenario/1",
+    "interpretation": {
+      "schedulerTriggerSemantics": "Agreed boundary: Eric-side emits scheduler/follow-up tool signals; Sourcy executes cron triggers (~30m cadence mentioned in action_items notes). Exact trigger-time send vs defer vs silent is meeting-noted as LLM-judged — not fully closed.",
+      "noOverclaim": "These fixtures are replay/simulation aids; they do not prove production multimodal or live supplier behavior."
+    },
+    "id": "media-supplier-thread-265320",
+    "family": "media",
+    "title": "Supplier sends Alibaba CDN product image mid-thread",
+    "tags": [
+      "media",
+      "supplier",
+      "image",
+      "conversation_replay"
+    ],
+    "provenance": {
+      "fixtureData": "real:lokesh-sheet",
+      "scenarioLogic": "hand-authored:wiring",
+      "sheetUrl": "https://docs.google.com/spreadsheets/d/1sImRTL93Rw6x_0EdTafh2BOc0c78-TSPlUo71Sx5sls/edit",
+      "conversation_id": "265320"
+    },
+    "harness": {
+      "mode": "conversation_replay",
+      "fixturePath": "fixtures/conversation-threads.sample.json",
+      "conversationId": "265320",
+      "injectMediaAs": "messages[].images",
+      "focus": "Bot should acknowledge supplier image / URL context without inventing unseen pixels."
+    },
+    "expectations": {
+      "minSupplierTurnsWithImages": 1,
+      "acknowledgeMedia": "expected-behavior-not-asserted-here"
+    },
+    "harnessDemo": {
+      "trackerRows": [
+        6,
+        10,
+        11
+      ],
+      "proves": [
+        "Real Lokesh sheet URLs hydrate transcript + mediaIndex for operator-visible media plumbing",
+        "Conversation replay preserves supplier-side ordering for demo"
+      ],
+      "doesNotProve": [
+        "Which prompt revision (tracker rows 5–6) is wired — not asserted by this harness",
+        "True multimodal vision / pixel grounding in simulated mode",
+        "Outbound attachment send via chatServer"
+      ]
+    }
+  }
+]

@@ -1,0 +1,489 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sourcy://supplier-bot/test-harness/harness-contract/v1",
+  "title": "Sourcy supplier-bot local test harness \u2014 API + run result contract",
+  "version": "1.0.0",
+  "description": "Stable JSON shapes for the local harness HTTP API and normalized run output. Production integration remains handleIncomingMessage / handleConversationEnd in supplier-bot export; this harness wraps replay + UI only. This harness is local/replay-first: passing runs validate wiring and scenario shapes, not end-to-end production proof of multimodal vision, real supplier messaging, or cron-side scheduler execution.",
+  "integrationFacts": {
+    "handleIncomingMessage": {
+      "signature": "async ({ sr, goals, history, contextText?, backend?, promptPath? })",
+      "returns": "{ reply, toolCalls, status, history }",
+      "statusValues": [
+        "continue",
+        "completed",
+        "rejected",
+        "no_reply",
+        "wechat_redirect",
+        "error"
+      ]
+    },
+    "handleConversationEnd": {
+      "signature": "async ({ sr, goals, history, botToolTrace, sendToBrain? })",
+      "returns": "{ summaryText, signals, toolCalls, brainReceipt? }"
+    },
+    "persistenceNote": "Sourcy owns DB persistence and cron-side scheduler execution; this harness is in-memory / local files only.",
+    "harnessLimitations": {
+      "summary": "Local harness only: in-memory runs, display-only scheduler payloads, simulated bot text in replays unless live adapter is enabled and healthy.",
+      "notProductionProof": [
+        "Multimodal / vision behavior in production",
+        "Real supplier or carrier delivery paths",
+        "Cron-side timer execution (owned by Sourcy production)"
+      ]
+    }
+  },
+  "scenarioFile": {
+    "description": "Each *.json under scenarios/ may be (1) a single runnable object with version=1, id, sr, sequence, or (2) an array of harness-scenario/1 objects (schemaVersion: harness-scenario/1). The runtime flattens array packs for GET /api/scenarios and resolves scenarioId across all pack files. harness-scenario/1 supports harness.mode conversation_replay (loads fixtures/conversation-threads.sample.json by conversationId) and synthetic_timeline (maps timeline[] supplier lines into supplier sequence steps). Replay normalization injects a leading system note; simulated bot replies are not historical production text between supplier turns.",
+    "required": [
+      "version",
+      "id",
+      "sr",
+      "sequence"
+    ],
+    "properties": {
+      "version": {
+        "const": 1
+      },
+      "id": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "sr": {
+        "type": "object",
+        "description": "Sourcing request: product, quantity, specs, customization, price (see supplier-bot types)"
+      },
+      "goals": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Tiered goals; null means harness may pass null to live pipeline for auto-generation"
+      },
+      "initialHistory": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "role",
+            "content"
+          ],
+          "properties": {
+            "role": {
+              "enum": [
+                "bot",
+                "supplier",
+                "system"
+              ]
+            },
+            "content": {
+              "type": "string"
+            },
+            "media": {
+              "$ref": "#/$defs/mediaItem"
+            },
+            "images": {
+              "type": "array"
+            },
+            "attachments": {
+              "type": "array"
+            }
+          }
+        }
+      },
+      "sequence": {
+        "type": "array",
+        "description": "Ordered steps. Each supplier step must be followed by handleIncomingMessage with history already including that message.",
+        "items": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "role",
+                "content"
+              ],
+              "properties": {
+                "type": {
+                  "const": "message"
+                },
+                "role": {
+                  "const": "supplier"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "media": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/mediaItem"
+                  }
+                },
+                "images": {
+                  "type": "array"
+                },
+                "attachments": {
+                  "type": "array"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "note"
+              ],
+              "properties": {
+                "type": {
+                  "const": "annotation"
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "options": {
+        "type": "object",
+        "properties": {
+          "runConversationEnd": {
+            "type": "boolean",
+            "default": true
+          },
+          "sendToBrain": {
+            "type": "boolean",
+            "default": false
+          },
+          "livePipeline": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "contextText": {
+        "type": "string",
+        "description": "Optional extra context string passed through to live handleIncomingMessage when present."
+      },
+      "harnessDemo": {
+        "type": "object",
+        "description": "Optional operator-facing honesty metadata on runnable scenarios (also supported on harness-scenario/1 packs).",
+        "properties": {
+          "trackerRows": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "proves": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "doesNotProve": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "httpApi": {
+    "baseUrl": "http://127.0.0.1:8799",
+    "endpoints": {
+      "GET /api/health": {
+        "response": {
+          "ok": true,
+          "harnessVersion": "string",
+          "adapterMode": "simulated|live|live_unavailable",
+          "bindHost": "string (address passed to server.listen \u2014 from SOURCY_HARNESS_HOST)",
+          "port": "number (SOURCY_HARNESS_PORT || PORT || 8799)"
+        }
+      },
+      "GET /api/contract": {
+        "response": {
+          "contract": "object (this file)"
+        }
+      },
+      "GET /api/scenarios": {
+        "response": {
+          "scenarios": [
+            {
+              "id": "string (scenario.id; array packs expose one entry per scenario object)",
+              "filename": "string (source JSON file name)",
+              "title": "string",
+              "path": "string (absolute path to the pack file \u2014 may contain multiple scenarios when root JSON is an array)"
+            }
+          ]
+        }
+      },
+      "POST /api/run": {
+        "requestBody": {
+          "scenarioId": "string (filename without .json or id field match)"
+        },
+        "response": {
+          "$ref": "#/$defs/harnessRunResult"
+        }
+      },
+      "GET /api/capabilities": {
+        "response": {
+          "manifest": "object (fixtures/capability-manifest.json shape)",
+          "scenarioIndex": "object mapping scenarioId -> array of { trackerRow, module, demoStatus, proofMode }"
+        }
+      }
+    },
+    "listenBinding": "Defaults: SOURCY_HARNESS_HOST=127.0.0.1 (local), SOURCY_HARNESS_PORT or PORT (8799). Docker/Render: set SOURCY_HARNESS_HOST=0.0.0.0 so public routing reaches the process; browse http://127.0.0.1:<port> locally."
+  },
+  "$defs": {
+    "mediaItem": {
+      "type": "object",
+      "description": "Normalized media reference for UI + traces (not full binary).",
+      "properties": {
+        "kind": {
+          "enum": [
+            "image",
+            "file",
+            "url"
+          ]
+        },
+        "url": {
+          "type": "string"
+        },
+        "mimeType": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "provenance": {
+          "type": "string",
+          "description": "e.g. scenario_fixture | simulated | live_message_api_unverified"
+        }
+      }
+    },
+    "harnessRunResult": {
+      "type": "object",
+      "required": [
+        "runId",
+        "scenarioId",
+        "adapterMode",
+        "transcript",
+        "turns",
+        "mediaIndex",
+        "schedulerView",
+        "conversationEnd",
+        "provenance"
+      ],
+      "properties": {
+        "runId": {
+          "type": "string"
+        },
+        "scenarioId": {
+          "type": "string"
+        },
+        "adapterMode": {
+          "enum": [
+            "simulated",
+            "live",
+            "live_unavailable"
+          ],
+          "description": "simulated = contract-shaped stub (default, no Gemini cost). live = supplier-bot export invoked. live_unavailable = live requested but import or env failed. UI should surface this per run and in /api/health; neither mode alone proves production readiness."
+        },
+        "transcript": {
+          "type": "array",
+          "description": "Full message list after run (bot/supplier roles)."
+        },
+        "turns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "integer"
+              },
+              "reply": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "toolCalls": {
+                "type": "array"
+              },
+              "noSend": {
+                "type": "boolean",
+                "description": "True when bot intentionally emits no outbound text (silence path) \u2014 still contract-relevant"
+              },
+              "schedulerHints": {
+                "type": "array",
+                "description": "Tool calls or notes tied to deferral / follow-up (Sourcy executes real cron in prod)"
+              }
+            }
+          }
+        },
+        "mediaIndex": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mediaItem"
+          }
+        },
+        "schedulerView": {
+          "type": "object",
+          "properties": {
+            "emittedToolCalls": {
+              "type": "array"
+            },
+            "notes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "sourcyExecution": {
+              "type": "string",
+              "description": "Reminder: only Sourcy cron executes real timers; harness shows emitted payloads only."
+            }
+          }
+        },
+        "conversationEnd": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Result of handleConversationEnd when run; null if skipped or failed."
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "simulatedLayers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "liveExportPath": {
+              "type": "string"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "capabilityManifestOk": {
+              "type": "boolean"
+            },
+            "capabilityManifestError": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "inputsView": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Normalized SR/goals/contextText/harnessDemo snapshot for the executed scenario (operator-facing).",
+          "properties": {
+            "scenarioId": {
+              "type": "string"
+            },
+            "sr": {
+              "type": "object"
+            },
+            "goals": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "contextText": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "harnessDemo": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Optional per-scenario honesty framing (proves / doesNotProve lists).",
+              "properties": {
+                "trackerRows": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "proves": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "doesNotProve": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "capabilityCoverage": {
+          "type": "array",
+          "description": "Capabilities from fixtures/capability-manifest.json whose scenarioIds include this scenarioId (subset fields for UI).",
+          "items": {
+            "type": "object",
+            "required": [
+              "trackerRow",
+              "module",
+              "demoStatus",
+              "proofMode",
+              "scenarioIds",
+              "blockingReason"
+            ],
+            "properties": {
+              "trackerRow": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "module": {
+                "type": "string"
+              },
+              "demoStatus": {
+                "type": "string"
+              },
+              "proofMode": {
+                "type": "string"
+              },
+              "scenarioIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "blockingReason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+[
+  {
+    "version": 1,
+    "id": "negotiation-round2-discount",
+    "title": "Supplier re-engages after silence with better commercial terms",
+    "harnessDemo": {
+      "trackerRows": [
+        14,
+        6,
+        8
+      ],
+      "proves": [
+        "Multi-turn supplier sequence after seeded stall context",
+        "Per-turn tool + reply discipline visible in UI"
+      ],
+      "doesNotProve": [
+        "Historical production negotiation quality",
+        "Cross-thread memory beyond this harness history"
+      ]
+    },
+    "contextText": "Supplier went quiet for 36h after quoting MOQ 1000. Treat next inbound as re-engagement, not a cold start.",
+    "sr": {
+      "product": "Recycled tote bag",
+      "quantity": "800",
+      "specs": "GOTS cotton, A4 tote",
+      "customization": "1c silk print",
+      "price": "target HKD 12"
+    },
+    "goals": [
+      {
+        "tier": "must",
+        "text": "Reduce MOQ toward 500 without dropping print clarity."
+      }
+    ],
+    "initialHistory": [
+      {
+        "role": "system",
+        "content": "[harness] negotiation probe: prior outbound included MOQ concern; supplier silent 36h."
+      },
+      {
+        "role": "bot",
+        "content": "Following up — can you support MOQ 800 at the HKD 12 target? If not, what is the closest you can do?"
+      },
+      {
+        "role": "supplier",
+        "content": "Sorry for delay — factory was closed. MOQ 800 is ok at HKD 12.2."
+      }
+    ],
+    "sequence": [
+      {
+        "type": "message",
+        "role": "supplier",
+        "content": "If you confirm today, we can do HKD 12.0 at MOQ 800 with same print spec."
+      }
+    ],
+    "options": {
+      "runConversationEnd": true,
+      "livePipeline": false
+    }
+  }
+]

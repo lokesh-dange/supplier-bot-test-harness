@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SB Evals</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar__header">
+        <h1>SB Evals</h1>
+      </div>
+      <div class="sidebar__section">
+        <label class="sidebar__label">Sourcing Request</label>
+        <select id="sr-select"><option value="all">All SRs</option></select>
+      </div>
+      <div class="sidebar__section">
+        <label class="sidebar__label">Status</label>
+        <select id="status-filter">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="replied">Replied</option>
+          <option value="messaged">Messaged</option>
+          <option value="stalled">Stalled</option>
+        </select>
+      </div>
+      <div class="sidebar__section">
+        <label class="sidebar__label">Supplier</label>
+        <select id="supplier-filter"><option value="all">All suppliers</option></select>
+      </div>
+      <div class="sidebar__section">
+        <label class="sidebar__label">Language</label>
+        <div class="radio-group" id="global-lang">
+          <label><input type="radio" name="global-lang" value="cn" checked /> 中文</label>
+          <label><input type="radio" name="global-lang" value="en" /> English</label>
+        </div>
+      </div>
+      <nav class="sidebar__nav">
+        <label class="sidebar__label">Navigate</label>
+        <button class="nav-btn is-active" data-page="dashboard">Dashboard</button>
+        <button class="nav-btn" data-page="smoke">Smoke Tests</button>
+        <button class="nav-btn" data-page="evals">Evals</button>
+        <button class="nav-btn" data-page="conversations">Conversations</button>
+        <button class="nav-btn" data-page="playground">Playground</button>
+        <button class="nav-btn" data-page="goals">Goals</button>
+        <button class="nav-btn" data-page="structured">Structured Output</button>
+        <button class="nav-btn" data-page="insert">Insert</button>
+        <button class="nav-btn" data-page="benchmark">Benchmark</button>
+      </nav>
+      <div class="sidebar__footer" id="sidebar-footer"></div>
+    </aside>
+
+    <main class="main">
+      <!-- Dashboard -->
+      <section id="page-dashboard" class="page is-active">
+        <div id="dash-header" class="sr-header"></div>
+        <div id="dash-kpis" class="kpi-row"></div>
+        <div id="dash-funnel" class="panel"></div>
+        <div id="dash-heatmap" class="panel"></div>
+      </section>
+
+      <!-- Smoke Tests -->
+      <section id="page-smoke" class="page">
+        <h2>Smoke Tests</h2>
+        <div id="smoke-verdict" class="verdict-badge"></div>
+        <div id="smoke-list" class="smoke-list"></div>
+        <button type="button" id="smoke-save" class="btn-primary">Save</button>
+      </section>
+
+      <!-- Evals -->
+      <section id="page-evals" class="page">
+        <h2>Evals</h2>
+        <div id="eval-categories" class="eval-cats"></div>
+        <div id="eval-dimensions" class="eval-dims"></div>
+      </section>
+
+      <!-- Conversations -->
+      <section id="page-conversations" class="page">
+        <h2>Conversations</h2>
+        <div class="conv-controls">
+          <select id="conv-supplier-select"></select>
+          <button type="button" id="conv-translate-btn" class="btn-secondary" style="display:none">Translate to English</button>
+        </div>
+        <div id="conv-stats" class="conv-stats"></div>
+        <div id="conv-messages" class="chat-messages"></div>
+        <div class="conv-feedback">
+          <label class="sidebar__label">Feedback</label>
+          <textarea id="conv-feedback" rows="3" placeholder="Notes on this conversation..."></textarea>
+        </div>
+
+        
+      </section>
+
+      <!-- Goals -->
+      <section id="page-playground" class="page">
+        <h2>Pipeline Inspector</h2>
+        <div id="pg-mode-banner" class="pg-mode-banner" style="margin-bottom:16px"></div>
+
+        <div style="display:flex;gap:16px;align-items:end;margin-bottom:16px;flex-wrap:wrap">
+          <div style="flex:1;min-width:240px">
+            <label style="font-weight:600;font-size:0.9em">Eval case</label>
+            <select id="pg-case-select" style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd;font-size:0.95em"></select>
+          </div>
+        </div>
+
+        <!-- SR + Goals bar (collapsible context) -->
+        <details class="pipeline-context" open>
+          <summary><strong>Context:</strong> <span id="pg-ctx-summary" class="muted">—</span></summary>
+          <div class="pipeline-context__body">
+            <div class="pipeline-grid" style="margin-bottom:8px">
+              <div><label>Product</label><input id="pg-product" type="text" class="pg-input"></div>
+              <div><label>Quantity</label><input id="pg-quantity" type="text" class="pg-input"></div>
+              <div><label>Specs</label><input id="pg-specs" type="text" class="pg-input"></div>
+              <div><label>Price Target</label><input id="pg-price" type="text" class="pg-input"></div>
+              <div><label>Customization</label><input id="pg-custom" type="text" class="pg-input"></div>
+            </div>
+            <div>
+              <label style="font-size:0.85em;font-weight:600;color:#6b7280">Goals</label>
+              <div id="pg-goals-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px"></div>
+            </div>
+            <div style="margin-top:12px">
+              <label style="font-size:0.85em;font-weight:600;color:#6b7280">Cross-Supplier Context <span class="muted" style="font-weight:400">(injected as <code>{{CONTEXT}}</code> in bot prompt)</span></label>
+              <textarea id="pg-context" rows="3" class="pg-input" placeholder="e.g. Supplier B quoted ¥2.5/unit for 2000pcs with Logo. Lead time 5 days. Use this to negotiate." style="width:100%;font-family:monospace;font-size:0.85em;margin-top:4px"></textarea>
+              <div class="muted" style="font-size:0.8em;margin-top:2px">Empty = "No cross-supplier context yet." (default in all current eval runs). Add intel here to test negotiation behavior.</div>
+            </div>
+            <div style="margin-top:12px">
+              <label style="font-size:0.85em;font-weight:600;color:#6b7280">Goals <span class="muted" style="font-weight:400">(editable — one per line: id — name — tier)</span></label>
+              <textarea id="pg-goals-edit" rows="3" class="pg-input" style="width:100%;font-family:monospace;font-size:0.85em;margin-top:4px"></textarea>
+            </div>
+          </div>
+        </details>
+
+        <!-- Turn timeline -->
+        <div id="pg-timeline" class="turn-timeline"></div>
+
+        <!-- Fork zone (appears when user forks from a turn) -->
+        <div id="pg-fork-zone" class="fork-zone" style="display:none">
+          <div class="fork-zone__header">
+            <span id="pg-fork-label" class="fork-zone__label"></span>
+            <button id="pg-fork-cancel" class="btn btn--secondary btn--sm">Cancel fork</button>
+          </div>
+          <div class="fork-zone__body">
+            <div id="pg-fork-messages" class="chat-messages" style="max-height:300px;overflow-y:auto;margin-bottom:10px"></div>
+            <div class="chat-input-bar" style="display:flex;gap:8px">
+              <input id="pg-chat-input" type="text" placeholder="Type alternative supplier message…" style="flex:1;padding:8px;border-radius:6px;border:1px solid #ddd">
+              <button id="pg-chat-send" class="btn btn--primary">Send</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Eval + output (shown below timeline) -->
+        <details class="pipeline-stage" style="margin-top:16px">
+          <summary class="pipeline-stage__header" style="cursor:pointer">
+            <span class="pipeline-stage__num">E</span>
+            <span class="pipeline-stage__title">Eval Results &amp; Structured Output</span>
+            <span class="pipeline-stage__badge" id="pg-eval-badge"></span>
+          </summary>
+          <div class="pipeline-stage__body">
+            <div id="pg-eval-grid"></div>
+            <div id="pg-eval-summary" class="eval-summary-box" style="margin-top:12px"></div>
+            <h4 style="margin-top:16px">Supplier Card (Extracted)</h4>
+            <div id="pg-output-card"></div>
+          </div>
+        </details>
+
+      </section>
+
+      <section id="page-goals" class="page">
+        <h2>Goals &amp; Questions</h2>
+        <div id="goals-summary" class="panel"></div>
+        <div id="goals-list"></div>
+        <h3 style="margin-top:24px">Goal Coverage per Supplier</h3>
+        <div id="goals-coverage" class="table-wrap"></div>
+      </section>
+
+      <!-- Structured Output -->
+      <section id="page-structured" class="page">
+        <h2>Structured Output</h2>
+        <div id="structured-table" class="table-wrap"></div>
+        <h3 style="margin-top:24px">Quotation Readiness</h3>
+        <div id="quotation-readiness"></div>
+      </section>
+
+      <!-- Insert -->
+      <section id="page-insert" class="page">
+        <h2>Insert</h2>
+        <div class="insert-form">
+          <div class="form-section">
+            <h3>Sourcing Request</h3>
+            <input type="text" id="insert-sr" value="SR-3937" placeholder="e.g. SR-3937" list="sr-suggestions" />
+            <datalist id="sr-suggestions"></datalist>
+          </div>
+          <div class="form-section">
+            <h3>Add Supplier</h3>
+            <div class="form-row">
+              <label>Supplier ID <input type="text" id="insert-supplier-id" value="#9" /></label>
+              <label>Name <input type="text" id="insert-supplier-name" placeholder="Optional" /></label>
+              <label>Status
+                <select id="insert-status"><option>completed</option><option>replied</option><option>messaged</option><option>stalled</option></select>
+              </label>
+            </div>
+            <div class="form-row">
+              <label>Date <input type="date" id="insert-date" /></label>
+              <label>Bot Messages <input type="number" id="insert-msg-count" value="10" min="0" /></label>
+              <label>Goals Total <input type="number" id="insert-goals-total" value="9" min="0" /></label>
+              <label>Goals Achieved <input type="number" id="insert-goals-achieved" value="0" min="0" /></label>
+            </div>
+          </div>
+          <div class="form-section">
+            <h3>Conversation</h3>
+            <textarea id="insert-convo" rows="8" placeholder="Paste conversation transcript here..."></textarea>
+          </div>
+          <div class="form-section">
+            <h3>Score</h3>
+            <button type="button" id="insert-gemini-eval" class="btn-accent" disabled>Run Gemini Eval</button>
+            <p class="muted">Scores conversation against all 14 eval dimensions (E1–E14) via Gemini</p>
+            <details style="margin-top:12px">
+              <summary>Manual eval scoring</summary>
+              <div id="insert-manual-scores"></div>
+            </details>
+          </div>
+          <button type="button" id="insert-save" class="btn-primary">Save</button>
+        </div>
+      </section>
+
+      <!-- Benchmark -->
+      <section id="page-benchmark" class="page">
+        <h2>Benchmark</h2>
+        <div id="bench-banner" class="bench-banner"></div>
+        <div id="bench-funnel" class="panel"></div>
+        <div id="bench-distribution" class="panel"></div>
+        <div id="bench-comparison" class="panel"></div>
+      </section>
+
+      <!-- Interactive Chat (accessible from sidebar) -->
+      <section id="page-chat" class="page" style="display:none">
+        <h2>Try It Yourself</h2>
+        <p class="muted">Pretend you are a 1688 supplier. Type messages and see how the bot responds.</p>
+        <div id="interactive-chat-messages" class="chat-messages" style="min-height:200px"></div>
+        <div class="chat-input-bar">
+          <input type="text" id="interactive-chat-input" placeholder="Type a supplier message in Chinese or English..." autocomplete="off" />
+          <button type="button" id="interactive-chat-send" class="btn-primary">Send</button>
+          <button type="button" id="interactive-chat-reset" class="btn-secondary">Reset</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="/harness-app.js"></script>
+</body>
+</html>

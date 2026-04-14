@@ -1,0 +1,382 @@
+[
+  {
+    "schemaVersion": "harness-scenario/1",
+    "interpretation": {
+      "schedulerTriggerSemantics": "Agreed boundary: Eric-side emits scheduler/follow-up tool signals; Sourcy executes cron triggers (~30m cadence mentioned in action_items notes). Exact trigger-time send vs defer vs silent is meeting-noted as LLM-judged — not fully closed.",
+      "noOverclaim": "These fixtures are replay/simulation aids; they do not prove production multimodal or live supplier behavior."
+    },
+    "id": "scheduler-explicit-deferral",
+    "family": "scheduler",
+    "title": "Supplier asks to continue tomorrow — explicit deferral",
+    "tags": [
+      "scheduler",
+      "deferral",
+      "tool-signal"
+    ],
+    "provenance": {
+      "fixtureData": "synthetic:timeline",
+      "scenarioLogic": "hand-authored:from-action-items+meeting",
+      "refs": [
+        "state/action_items.json#supplier-scheduler-scenarios"
+      ]
+    },
+    "harness": {
+      "mode": "synthetic_timeline",
+      "tickMinutes": 30
+    },
+    "timeline": [
+      {
+        "offsetMin": 0,
+        "actor": "bot",
+        "kind": "message",
+        "text": "Can you share certification for the fabric dye?"
+      },
+      {
+        "offsetMin": 5,
+        "actor": "supplier",
+        "kind": "message",
+        "text": "Out of office now — please message me tomorrow morning and I will send the cert PDF."
+      }
+    ],
+    "expectedSignals": [
+      {
+        "type": "schedule_followup",
+        "confidence": "suggested",
+        "reason": "supplier_explicit_tomorrow"
+      }
+    ],
+    "expectedAtTrigger": {
+      "behaviorSpace": [
+        "defer_to_supplier_window",
+        "silent_until_window"
+      ],
+      "note": "Meeting: LLM judgment at trigger time — fixture does not force one outcome."
+    },
+    "harnessDemo": {
+      "trackerRows": [
+        13,
+        6,
+        8
+      ],
+      "proves": [
+        "Synthetic timeline maps into supplier-step runner",
+        "Scheduler-shaped tool payloads appear in turn traces and conversationEnd view"
+      ],
+      "doesNotProve": [
+        "Cron-side trigger execution on Sourcy infra",
+        "Final LLM judgment at real trigger time",
+        "Cross-supplier context (row 8) unless the scenario explicitly exercises it"
+      ]
+    }
+  },
+  {
+    "schemaVersion": "harness-scenario/1",
+    "interpretation": {
+      "schedulerTriggerSemantics": "Agreed boundary: Eric-side emits scheduler/follow-up tool signals; Sourcy executes cron triggers (~30m cadence mentioned in action_items notes). Exact trigger-time send vs defer vs silent is meeting-noted as LLM-judged — not fully closed.",
+      "noOverclaim": "These fixtures are replay/simulation aids; they do not prove production multimodal or live supplier behavior."
+    },
+    "id": "scheduler-promise-then-silent",
+    "family": "scheduler",
+    "title": "Supplier promises reply in hours then goes quiet",
+    "tags": [
+      "scheduler",
+      "promise",
+      "silence"
+    ],
+    "provenance": {
+      "fixtureData": "synthetic:timeline",
+      "scenarioLogic": "hand-authored:from-Apr5-three-scenarios"
+    },
+    "harness": {
+      "mode": "synthetic_timeline",
+      "tickMinutes": 30
+    },
+    "timeline": [
+      {
+        "offsetMin": 0,
+        "actor": "bot",
+        "kind": "message",
+        "text": "What MOQ for 500pcs with custom logo?"
+      },
+      {
+        "offsetMin": 3,
+        "actor": "supplier",
+        "kind": "message",
+        "text": "Let me check with factory — I will reply in 3 hours."
+      }
+    ],
+    "expectedSignals": [
+      {
+        "type": "schedule_followup",
+        "confidence": "suggested",
+        "reason": "promise_within_hours"
+      }
+    ],
+    "silence": {
+      "afterPromiseMin": 240,
+      "description": "No further supplier messages after promise window."
+    },
+    "harnessDemo": {
+      "trackerRows": [
+        13,
+        6,
+        8
+      ],
+      "proves": [
+        "Synthetic timeline maps into supplier-step runner",
+        "Scheduler-shaped tool payloads appear in turn traces and conversationEnd view"
+      ],
+      "doesNotProve": [
+        "Cron-side trigger execution on Sourcy infra",
+        "Final LLM judgment at real trigger time",
+        "Cross-supplier context (row 8) unless the scenario explicitly exercises it"
+      ]
+    }
+  },
+  {
+    "schemaVersion": "harness-scenario/1",
+    "interpretation": {
+      "schedulerTriggerSemantics": "Agreed boundary: Eric-side emits scheduler/follow-up tool signals; Sourcy executes cron triggers (~30m cadence mentioned in action_items notes). Exact trigger-time send vs defer vs silent is meeting-noted as LLM-judged — not fully closed.",
+      "noOverclaim": "These fixtures are replay/simulation aids; they do not prove production multimodal or live supplier behavior."
+    },
+    "id": "scheduler-full-silence",
+    "family": "scheduler",
+    "title": "Supplier stops responding with no explicit promise",
+    "tags": [
+      "scheduler",
+      "silence"
+    ],
+    "provenance": {
+      "fixtureData": "synthetic:timeline",
+      "scenarioLogic": "hand-authored:from-Apr5-three-scenarios"
+    },
+    "harness": {
+      "mode": "synthetic_timeline",
+      "tickMinutes": 30
+    },
+    "timeline": [
+      {
+        "offsetMin": 0,
+        "actor": "bot",
+        "kind": "message",
+        "text": "Please confirm unit price for 1000 units shipped to HK."
+      },
+      {
+        "offsetMin": 20,
+        "actor": "supplier",
+        "kind": "message",
+        "text": "收到"
+      }
+    ],
+    "silence": {
+      "afterLastMessageMin": 180,
+      "description": "No further messages; tests generic follow-up vs none."
+    },
+    "expectedSignals": [
+      {
+        "type": "schedule_followup_or_none",
+        "confidence": "suggested",
+        "reason": "ambiguous_requires_judgment"
+      }
+    ],
+    "harnessDemo": {
+      "trackerRows": [
+        13,
+        6,
+        8
+      ],
+      "proves": [
+        "Synthetic timeline maps into supplier-step runner",
+        "Scheduler-shaped tool payloads appear in turn traces and conversationEnd view"
+      ],
+      "doesNotProve": [
+        "Cron-side trigger execution on Sourcy infra",
+        "Final LLM judgment at real trigger time",
+        "Cross-supplier context (row 8) unless the scenario explicitly exercises it"
+      ]
+    }
+  },
+  {
+    "schemaVersion": "harness-scenario/1",
+    "interpretation": {
+      "schedulerTriggerSemantics": "Agreed boundary: Eric-side emits scheduler/follow-up tool signals; Sourcy executes cron triggers (~30m cadence mentioned in action_items notes). Exact trigger-time send vs defer vs silent is meeting-noted as LLM-judged — not fully closed.",
+      "noOverclaim": "These fixtures are replay/simulation aids; they do not prove production multimodal or live supplier behavior."
+    },
+    "id": "scheduler-supplier-reply-before-nudge",
+    "family": "scheduler",
+    "title": "Supplier answers before scheduled nudge fires",
+    "tags": [
+      "scheduler",
+      "cancel",
+      "pre-empt"
+    ],
+    "provenance": {
+      "fixtureData": "synthetic:timeline",
+      "scenarioLogic": "hand-authored:meeting-cancel-nudge"
+    },
+    "harness": {
+      "mode": "synthetic_timeline",
+      "tickMinutes": 30
+    },
+    "timeline": [
+      {
+        "offsetMin": 0,
+        "actor": "bot",
+        "kind": "message",
+        "text": "Following up on HS code — still there?"
+      },
+      {
+        "offsetMin": 10,
+        "actor": "supplier",
+        "kind": "message",
+        "text": "Sorry for delay — HS code is 3923.30."
+      }
+    ],
+    "scheduledNudge": {
+      "wouldFireAtMin": 60,
+      "cancelledBecause": "supplier_replied_before_fire"
+    },
+    "expectedSignals": [
+      {
+        "type": "cancel_scheduled_followup",
+        "confidence": "suggested",
+        "reason": "supplier_preempted"
+      }
+    ],
+    "harnessDemo": {
+      "trackerRows": [
+        13,
+        6,
+        8
+      ],
+      "proves": [
+        "Synthetic timeline maps into supplier-step runner",
+        "Scheduler-shaped tool payloads appear in turn traces and conversationEnd view"
+      ],
+      "doesNotProve": [
+        "Cron-side trigger execution on Sourcy infra",
+        "Final LLM judgment at real trigger time",
+        "Cross-supplier context (row 8) unless the scenario explicitly exercises it"
+      ]
+    }
+  },
+  {
+    "schemaVersion": "harness-scenario/1",
+    "interpretation": {
+      "schedulerTriggerSemantics": "Agreed boundary: Eric-side emits scheduler/follow-up tool signals; Sourcy executes cron triggers (~30m cadence mentioned in action_items notes). Exact trigger-time send vs defer vs silent is meeting-noted as LLM-judged — not fully closed.",
+      "noOverclaim": "These fixtures are replay/simulation aids; they do not prove production multimodal or live supplier behavior."
+    },
+    "id": "silence-no-reply-needed-thanks",
+    "family": "silence",
+    "title": "Supplier thanks / promote factory — bot should send nothing",
+    "tags": [
+      "silence",
+      "no-send",
+      "goals-complete"
+    ],
+    "provenance": {
+      "fixtureData": "synthetic:timeline",
+      "scenarioLogic": "hand-authored:chi-fu-road-meeting"
+    },
+    "harness": {
+      "mode": "synthetic_timeline"
+    },
+    "timeline": [
+      {
+        "offsetMin": 0,
+        "actor": "bot",
+        "kind": "message",
+        "text": "Thanks — we have everything needed for this SR."
+      },
+      {
+        "offsetMin": 2,
+        "actor": "supplier",
+        "kind": "message",
+        "text": "谢谢！也欢迎推荐我们工厂给别的客户。"
+      }
+    ],
+    "expectations": {
+      "outboundMessage": "none",
+      "harnessLabel": "no-reply-needed"
+    },
+    "harnessDemo": {
+      "trackerRows": [
+        13,
+        6,
+        8
+      ],
+      "proves": [
+        "Synthetic timeline maps into supplier-step runner",
+        "Scheduler-shaped tool payloads appear in turn traces and conversationEnd view"
+      ],
+      "doesNotProve": [
+        "Cron-side trigger execution on Sourcy infra",
+        "Final LLM judgment at real trigger time",
+        "Cross-supplier context (row 8) unless the scenario explicitly exercises it"
+      ]
+    }
+  },
+  {
+    "schemaVersion": "harness-scenario/1",
+    "interpretation": {
+      "schedulerTriggerSemantics": "Agreed boundary: Eric-side emits scheduler/follow-up tool signals; Sourcy executes cron triggers (~30m cadence mentioned in action_items notes). Exact trigger-time send vs defer vs silent is meeting-noted as LLM-judged — not fully closed.",
+      "noOverclaim": "These fixtures are replay/simulation aids; they do not prove production multimodal or live supplier behavior."
+    },
+    "id": "scheduler-defer-while-thread-advances",
+    "family": "scheduler",
+    "title": "Deferred item while other topics advance (judgment-heavy)",
+    "tags": [
+      "scheduler",
+      "deferral",
+      "multi-topic",
+      "interpretation"
+    ],
+    "provenance": {
+      "fixtureData": "synthetic:timeline",
+      "scenarioLogic": "hand-authored:meeting-example-cert-tomorrow-other-topics"
+    },
+    "harness": {
+      "mode": "synthetic_timeline",
+      "tickMinutes": 30
+    },
+    "timeline": [
+      {
+        "offsetMin": 0,
+        "actor": "bot",
+        "kind": "message",
+        "text": "Need certification tomorrow; also what is lead time?"
+      },
+      {
+        "offsetMin": 5,
+        "actor": "supplier",
+        "kind": "message",
+        "text": "Cert will come tomorrow AM. Lead time is 14 days."
+      },
+      {
+        "offsetMin": 40,
+        "actor": "bot",
+        "kind": "message",
+        "text": "Acknowledged lead time — please send cert when ready."
+      }
+    ],
+    "expectedAtTrigger": {
+      "note": "Meeting: when cert deadline hits while thread moved on, trigger-time decision may be defer vs nudge vs silent — label only; do not treat as deterministic spec."
+    },
+    "harnessDemo": {
+      "trackerRows": [
+        13,
+        6,
+        8
+      ],
+      "proves": [
+        "Synthetic timeline maps into supplier-step runner",
+        "Scheduler-shaped tool payloads appear in turn traces and conversationEnd view"
+      ],
+      "doesNotProve": [
+        "Cron-side trigger execution on Sourcy infra",
+        "Final LLM judgment at real trigger time",
+        "Cross-supplier context (row 8) unless the scenario explicitly exercises it"
+      ]
+    }
+  }
+]

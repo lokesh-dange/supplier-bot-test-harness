@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "source": {
+    "trackerRows": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "notes": "trackerRow values follow the synced `rowNumber` values in workdir/source-sync/lokesh-deliverables-tracker/latest.json. The capability block starts at row 3 because earlier tracker rows are infra items. Default runs are simulated stubs unless SUPPLIER_BOT_HARNESS_LIVE=1 + export + GEMINI_API_KEY."
+  },
+  "capabilities": [
+    {
+      "trackerRow": 3,
+      "module": "Goal gen from SR",
+      "detail": "goal-generator.js",
+      "trackerStatus": "In Progress",
+      "demoStatus": "partial",
+      "proofMode": "scenario_synthetic",
+      "scenarioIds": [
+        "goalgen-explicit-goals-array"
+      ],
+      "whatLokeshCanTest": "Run goalgen-explicit-goals-array and inspect inputsView.goals to confirm the harness can pass a goals array through the adapter boundary.",
+      "blockingReason": "Simulated mode does not prove production goal-generation quality."
+    },
+    {
+      "trackerRow": 4,
+      "module": "Conversation Agent",
+      "detail": "Integrate latest v4 prompt",
+      "trackerStatus": "Not Started",
+      "demoStatus": "partial",
+      "proofMode": "docs_only",
+      "scenarioIds": [],
+      "whatLokeshCanTest": "This harness does not fingerprint prompt revisions. Verify this line item in the supplier-bot export or repo history, not in the UI.",
+      "blockingReason": "No harness scenario can honestly prove which prompt revision is active."
+    },
+    {
+      "trackerRow": 5,
+      "module": "Conversation Agent",
+      "detail": "buildConversationBotPrompt()",
+      "trackerStatus": "Not Started",
+      "demoStatus": "partial",
+      "proofMode": "docs_only",
+      "scenarioIds": [],
+      "whatLokeshCanTest": "The harness only calls handleIncomingMessage with SR/goals/history/contextText. Internal prompt assembly is not surfaced separately here.",
+      "blockingReason": "Prompt assembly is hidden inside the export and not observable in this harness."
+    },
+    {
+      "trackerRow": 6,
+      "module": "Conversation Agent",
+      "detail": "callBotWithTools() / llmCallWithTools / finalize reply",
+      "trackerStatus": "Not Started",
+      "demoStatus": "partial",
+      "proofMode": "scenario_synthetic",
+      "scenarioIds": [
+        "media-supplier-thread-265320",
+        "media-product-detail-266217",
+        "scheduler-explicit-deferral",
+        "scheduler-promise-then-silent",
+        "scheduler-full-silence",
+        "scheduler-supplier-reply-before-nudge",
+        "silence-no-reply-needed-thanks",
+        "scheduler-defer-while-thread-advances",
+        "escalation-logo-asset-request",
+        "negotiation-round2-discount",
+        "context-cross-supplier-internal-anchor",
+        "goalgen-explicit-goals-array"
+      ],
+      "whatLokeshCanTest": "Run any linked scenario to inspect the contract-shaped transcript, turn payloads, and reply/tool envelope.",
+      "blockingReason": "Default runs are simulated, so this does not prove production wording or tool fidelity."
+    },
+    {
+      "trackerRow": 7,
+      "module": "Cross-Supplier Context",
+      "detail": "context-builder.js and context injection",
+      "trackerStatus": "Not Started",
+      "demoStatus": "partial",
+      "proofMode": "scenario_synthetic",
+      "scenarioIds": [
+        "context-cross-supplier-internal-anchor"
+      ],
+      "whatLokeshCanTest": "Run context-cross-supplier-internal-anchor and inspect inputsView.contextText plus the seeded history.",
+      "blockingReason": "The harness does not prove the live model will never leak competitor identity."
+    },
+    {
+      "trackerRow": 8,
+      "module": "Summary Agent",
+      "detail": "summary-agent-llm.js and tool outputs",
+      "trackerStatus": "Not Started",
+      "demoStatus": "partial",
+      "proofMode": "scenario_synthetic",
+      "scenarioIds": [
+        "media-supplier-thread-265320",
+        "media-product-detail-266217",
+        "scheduler-explicit-deferral",
+        "scheduler-promise-then-silent",
+        "scheduler-full-silence",
+        "scheduler-supplier-reply-before-nudge",
+        "silence-no-reply-needed-thanks",
+        "scheduler-defer-while-thread-advances",
+        "escalation-logo-asset-request",
+        "negotiation-round2-discount",
+        "context-cross-supplier-internal-anchor",
+        "goalgen-explicit-goals-array"
+      ],
+      "whatLokeshCanTest": "After any run, inspect conversationEnd.summaryText, signals, and toolCalls in the UI or API.",
+      "blockingReason": "The default summary path is simulated and not production-scored."
+    },
+    {
+      "trackerRow": 9,
+      "module": "Brain Endpoint",
+      "detail": "receiveSignals() replacement and downstream delivery",
+      "trackerStatus": "Not Started",
+      "demoStatus": "blocked",
+      "proofMode": "blocked",
+      "scenarioIds": [],
+      "whatLokeshCanTest": "No brain receipt path is packaged in this harness tonight.",
+      "blockingReason": "A real brain URL and delivery receipt loop are not wired here."
+    },
+    {
+      "trackerRow": 10,
+      "module": "File Handling",
+      "detail": "Read images, send URLs, send logo/design files, image integration pending",
+      "trackerStatus": "In Progress",
+      "demoStatus": "partial",
+      "proofMode": "scenario_replay",
+      "scenarioIds": [
+        "media-supplier-thread-265320",
+        "media-product-detail-266217"
+      ],
+      "whatLokeshCanTest": "Run the media replay scenarios to verify sheet-backed URLs, transcript ordering, and operator-visible media plumbing.",
+      "blockingReason": "Image integration into the live prompt remains pending, so this is not full file-handling proof."
+    },
+    {
+      "trackerRow": 11,
+      "module": "Grounding Verification",
+      "detail": "Tool integration / multimodal grounding quality",
+      "trackerStatus": "Not Started",
+      "demoStatus": "partial",
+      "proofMode": "live_optional",
+      "scenarioIds": [
+        "media-supplier-thread-265320",
+        "media-product-detail-266217"
+      ],
+      "whatLokeshCanTest": "With live export enabled, compare runs with and without images for manual grounding checks.",
+      "blockingReason": "Simulated mode does not exercise real vision or grounding."
+    },
+    {
+      "trackerRow": 12,
+      "module": "Escalation Capability",
+      "detail": "Escalate to brain when supplier requests assets or other blocked inputs",
+      "trackerStatus": "In Progress",
+      "demoStatus": "partial",
+      "proofMode": "scenario_synthetic",
+      "scenarioIds": [
+        "escalation-logo-asset-request"
+      ],
+      "whatLokeshCanTest": "Run escalation-logo-asset-request and inspect transcript plus summary-envelope outputs.",
+      "blockingReason": "Real escalation routing and human queue handling still live outside this folder."
+    },
+    {
+      "trackerRow": 13,
+      "module": "Scheduler",
+      "detail": "Emit scheduling tool calls; Sourcy cron executes real timers",
+      "trackerStatus": "In Progress",
+      "demoStatus": "partial",
+      "proofMode": "scenario_synthetic",
+      "scenarioIds": [
+        "scheduler-explicit-deferral",
+        "scheduler-promise-then-silent",
+        "scheduler-full-silence",
+        "scheduler-supplier-reply-before-nudge",
+        "silence-no-reply-needed-thanks",
+        "scheduler-defer-while-thread-advances"
+      ],
+      "whatLokeshCanTest": "Inspect schedulerView.emittedToolCalls and the scenario-level honesty notes.",
+      "blockingReason": "Cron-side execution is not part of the harness and trigger-time behavior is still judgment-heavy."
+    },
+    {
+      "trackerRow": 14,
+      "module": "Negotiation Capabilities (Brain 0.1)\n(Re-engagement Round 2)",
+      "detail": "Re-engagement and price-reduction follow-up logic after an initial quotation",
+      "trackerStatus": "Not Started",
+      "demoStatus": "partial",
+      "proofMode": "scenario_synthetic",
+      "scenarioIds": [
+        "negotiation-round2-discount"
+      ],
+      "whatLokeshCanTest": "Run negotiation-round2-discount to inspect the re-engagement frame and per-turn envelope.",
+      "blockingReason": "Supplier lines are synthetic and the bot reply is stubbed unless live mode is enabled."
+    },
+    {
+      "trackerRow": 15,
+      "module": "Testing",
+      "detail": "15-20 supplier live batch once Tek infra is stable",
+      "trackerStatus": "Not Started",
+      "demoStatus": "blocked",
+      "proofMode": "blocked",
+      "scenarioIds": [],
+      "whatLokeshCanTest": "Use this harness for contract rehearsal only until the live batch is unblocked.",
+      "blockingReason": "Live supplier traffic remains infra-gated outside this package."
+    },
+    {
+      "trackerRow": 16,
+      "module": "Evals",
+      "detail": "Integrate evals and benchmark views",
+      "trackerStatus": "In Progress",
+      "demoStatus": "not_in_harness",
+      "proofMode": "docs_only",
+      "scenarioIds": [],
+      "whatLokeshCanTest": "Use the supplier-bot benchmark/eval workspace for scores; this harness is not the judge runner.",
+      "blockingReason": "Score aggregation intentionally lives outside this harness."
+    },
+    {
+      "trackerRow": 17,
+      "module": "Tek's Brain Integration",
+      "detail": "Parallel experiment with Piyush that needs a supplier-bot interface in 1-2 days",
+      "trackerStatus": "TBD",
+      "demoStatus": "blocked",
+      "proofMode": "blocked",
+      "scenarioIds": [],
+      "whatLokeshCanTest": "This harness can inform interface discussions, but it does not wire Tek's brain experiment.",
+      "blockingReason": "No interface contract or brain-side integration path is shipped in this folder."
+    }
+  ]
+}
