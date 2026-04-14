@@ -790,8 +790,9 @@ showPage('dashboard');
       let body = '';
 
       // Supplier inputs
-      for (const msg of t.supplierInputs) {
-        const translated = t._supplierInputs_en ? t._supplierInputs_en[t.supplierInputs.indexOf(msg)] : null;
+      for (let mi = 0; mi < t.supplierInputs.length; mi++) {
+        const msg = t.supplierInputs[mi];
+        const translated = (t._supplierInputs_en && t._supplierInputs_en[mi]) || translationCache.get(msg) || null;
         const text = translated || msg;
         body += `<div class="turn-msg"><span class="turn-msg__role turn-msg__role--supplier">supplier</span><span class="turn-msg__content">${esc(text)}</span></div>`;
       }
@@ -884,13 +885,19 @@ showPage('dashboard');
       if (t.botResponse) historyBeforeFork.push({ role: 'bot', content: t.botResponse });
     }
 
+    // Helper: get translated text for a supplier message (checks turn cache, then global cache)
+    function getTranslated(turn, msgIdx, original) {
+      if (turn._supplierInputs_en && turn._supplierInputs_en[msgIdx]) return turn._supplierInputs_en[msgIdx];
+      if (translationCache.has(original)) return translationCache.get(original);
+      return original;
+    }
+
     // Build display history using translations when available
     const displayHistory = [];
     for (let i = 0; i < turnIndex; i++) {
       const t = turns[i];
       t.supplierInputs.forEach((msg, mi) => {
-        const translated = t._supplierInputs_en ? t._supplierInputs_en[mi] : null;
-        displayHistory.push({ role: 'supplier', content: translated || msg });
+        displayHistory.push({ role: 'supplier', content: getTranslated(t, mi, msg) });
       });
       if (t.botResponse) displayHistory.push({ role: 'bot', content: t.botResponse });
     }
@@ -909,8 +916,7 @@ showPage('dashboard');
     html += `<div class="fork-divider">&#9548; Original Turn ${turnIndex} (fork point):</div>`;
     for (let mi = 0; mi < originalTurn.supplierInputs.length; mi++) {
       const msg = originalTurn.supplierInputs[mi];
-      const translated = originalTurn._supplierInputs_en ? originalTurn._supplierInputs_en[mi] : null;
-      html += `<div class="chat-msg chat-msg--supplier"><div class="chat-msg__role">supplier</div>${esc(translated || msg)}</div>`;
+      html += `<div class="chat-msg chat-msg--supplier"><div class="chat-msg__role">supplier</div>${esc(getTranslated(originalTurn, mi, msg))}</div>`;
     }
     if (originalTurn.botResponse) {
       html += `<div class="chat-msg chat-msg--bot"><div class="chat-msg__role">bot</div>${esc(originalTurn.botResponse)}</div>`;
