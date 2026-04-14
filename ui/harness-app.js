@@ -637,6 +637,14 @@ function reRenderAll() {
   renderBenchmark();
   populateSrFilter();
   populateInsertSrSuggestions();
+  // Re-render playground case selector and reload current case
+  if (window._populatePgCases) {
+    window._populatePgCases();
+    const pgCaseSel = $('pg-case-select');
+    if (pgCaseSel && pgCaseSel.value) {
+      pgCaseSel.dispatchEvent(new Event('change'));
+    }
+  }
 }
 
 function populateSrFilter() {
@@ -724,7 +732,7 @@ showPage('dashboard');
 
   // Populate case selector
   const suppliers = evalData?.suppliers || [];
-  function populatePgCases() {
+  window._populatePgCases = function() {
     const filtered = filteredSuppliers();
     caseSel.innerHTML = filtered.map((s) => {
       const origIdx = suppliers.indexOf(s);
@@ -732,8 +740,8 @@ showPage('dashboard');
       const scored = s.score > 0 ? ` — ${s.percent}% (${s.score}/${s.max})` : ' (not scored)';
       return `<option value="${origIdx}">${esc(label)}${scored}</option>`;
     }).join('');
-  }
-  populatePgCases();
+  };
+  window._populatePgCases();
 
   function loadCase(idx) {
     const s = suppliers[idx];
@@ -743,12 +751,12 @@ showPage('dashboard');
 
     // Context bar
     const sr = s.sr || {};
-    $('pg-product').value = sr.product || '';
+    $('pg-product').value = L(sr.product, sr.product_en) || '';
     $('pg-quantity').value = sr.quantity || '';
-    $('pg-specs').value = sr.specs || '';
+    $('pg-specs').value = L(sr.specs, sr.specs_en) || '';
     $('pg-price').value = sr.price || '';
-    $('pg-custom').value = sr.customization || '';
-    $('pg-ctx-summary').textContent = `${sr.product || '?'} · ${sr.quantity || '?'} · ${s.goals?.length || 0} goals · ${s.turns?.length || 0} turns`;
+    $('pg-custom').value = L(sr.customization, sr.customization_en) || '';
+    $('pg-ctx-summary').textContent = `${L(sr.product, sr.product_en) || '?'} · ${sr.quantity || '?'} · ${s.goals?.length || 0} goals · ${s.turns?.length || 0} turns`;
 
     // Goal chips
     const gc = s.pipelineTrace?.goalCompletion || {};
@@ -770,13 +778,22 @@ showPage('dashboard');
     if (ctxEl) ctxEl.value = '';
 
     // Turn timeline
+    renderTimeline(s);
+
+    // Eval + output
+    renderEvalPanel(s);
+  }
+
+  function renderTimeline(s) {
     const turns = s.turns || [];
     timeline.innerHTML = turns.map((t, ti) => {
       let body = '';
 
       // Supplier inputs
       for (const msg of t.supplierInputs) {
-        body += `<div class="turn-msg"><span class="turn-msg__role turn-msg__role--supplier">supplier</span><span class="turn-msg__content">${esc(msg)}</span></div>`;
+        const translated = (globalLang === 'en' && t._supplierInputs_en) ? t._supplierInputs_en[t.supplierInputs.indexOf(msg)] : null;
+        const text = translated || msg;
+        body += `<div class="turn-msg"><span class="turn-msg__role turn-msg__role--supplier">supplier</span><span class="turn-msg__content">${esc(text)}</span></div>`;
       }
 
       // Bot response
@@ -805,9 +822,6 @@ showPage('dashboard');
         <div class="turn-card__body">${body}</div>
       </div>`;
     }).join('');
-
-    // Eval + output
-    renderEvalPanel(s);
   }
 
   function renderEvalPanel(s) {
@@ -985,6 +999,46 @@ showPage('dashboard');
 
   // Event: case change
   caseSel.addEventListener('change', () => loadCase(parseInt(caseSel.value)));
+
+  // Event: translate timeline
+  $('pg-translate-btn')?.addEventListener('click', async () => {
+    if (!currentCase) return;
+    const btn = $('pg-translate-btn');
+    const turns = currentCase.turns || [];
+
+    // Collect all Chinese supplier messages
+    const allTexts = [];
+    const textMap = []; // [{turnIdx, msgIdx}]
+    turns.forEach((t, ti) => {
+      (t.supplierInputs || []).forEach((msg, mi) => {
+        if (msg && !/^[\x00-\x7F]*$/.test(msg)) {
+          allTexts.push(msg);
+          textMap.push({ ti, mi });
+        }
+      });
+    });
+
+    if (!allTexts.length) { btn.textContent = 'Nothing to translate'; setTimeout(() => { btn.textContent = 'Translate to English'; }, 1500); return; }
+
+    btn.textContent = `Translating ${allTexts.length} messages...`;
+    btn.disabled = true;
+
+    const translated = await translateTexts(allTexts);
+
+    // Store translations on the turn objects
+    textMap.forEach(({ ti, mi }, i) => {
+      const t = turns[ti];
+      if (!t._supplierInputs_en) t._supplierInputs_en = [...t.supplierInputs];
+      t._supplierInputs_en[mi] = translationCache.get(allTexts[i]) || allTexts[i];
+    });
+
+    btn.textContent = 'Translated!';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = 'Translate to English'; }, 1500);
+
+    // Re-render the timeline with translations
+    renderTimeline(currentCase);
+  });
 
   // Init
   if (suppliers.length) loadCase(0);
