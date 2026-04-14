@@ -791,7 +791,7 @@ showPage('dashboard');
 
       // Supplier inputs
       for (const msg of t.supplierInputs) {
-        const translated = (globalLang === 'en' && t._supplierInputs_en) ? t._supplierInputs_en[t.supplierInputs.indexOf(msg)] : null;
+        const translated = t._supplierInputs_en ? t._supplierInputs_en[t.supplierInputs.indexOf(msg)] : null;
         const text = translated || msg;
         body += `<div class="turn-msg"><span class="turn-msg__role turn-msg__role--supplier">supplier</span><span class="turn-msg__content">${esc(text)}</span></div>`;
       }
