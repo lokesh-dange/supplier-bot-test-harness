@@ -876,7 +876,7 @@ showPage('dashboard');
     const forkCard = document.querySelector(`.turn-card[data-turn-index="${turnIndex}"]`);
     if (forkCard) forkCard.classList.add('is-fork-point');
 
-    // Build history up to fork point
+    // Build history up to fork point (always use original Chinese for pipeline)
     const historyBeforeFork = [];
     for (let i = 0; i < turnIndex; i++) {
       const t = turns[i];
@@ -884,20 +884,33 @@ showPage('dashboard');
       if (t.botResponse) historyBeforeFork.push({ role: 'bot', content: t.botResponse });
     }
 
+    // Build display history using translations when available
+    const displayHistory = [];
+    for (let i = 0; i < turnIndex; i++) {
+      const t = turns[i];
+      t.supplierInputs.forEach((msg, mi) => {
+        const translated = t._supplierInputs_en ? t._supplierInputs_en[mi] : null;
+        displayHistory.push({ role: 'supplier', content: translated || msg });
+      });
+      if (t.botResponse) displayHistory.push({ role: 'bot', content: t.botResponse });
+    }
+
     const forkMsgs = $('pg-fork-messages');
     const originalTurn = turns[turnIndex];
 
     // Render prior turns as chat bubbles for context
     let html = '<div class="fork-context-label">Prior conversation (T0–T' + (turnIndex - 1) + '):</div>';
-    for (const m of historyBeforeFork) {
+    for (const m of displayHistory) {
       const cls = m.role === 'bot' ? 'chat-msg--bot' : 'chat-msg--supplier';
       html += `<div class="chat-msg ${cls} chat-msg--faded"><div class="chat-msg__role">${esc(m.role)}</div>${esc(m.content)}</div>`;
     }
 
     // Show the original turn being forked — as individual bubbles
     html += `<div class="fork-divider">&#9548; Original Turn ${turnIndex} (fork point):</div>`;
-    for (const msg of originalTurn.supplierInputs) {
-      html += `<div class="chat-msg chat-msg--supplier"><div class="chat-msg__role">supplier</div>${esc(msg)}</div>`;
+    for (let mi = 0; mi < originalTurn.supplierInputs.length; mi++) {
+      const msg = originalTurn.supplierInputs[mi];
+      const translated = originalTurn._supplierInputs_en ? originalTurn._supplierInputs_en[mi] : null;
+      html += `<div class="chat-msg chat-msg--supplier"><div class="chat-msg__role">supplier</div>${esc(translated || msg)}</div>`;
     }
     if (originalTurn.botResponse) {
       html += `<div class="chat-msg chat-msg--bot"><div class="chat-msg__role">bot</div>${esc(originalTurn.botResponse)}</div>`;
