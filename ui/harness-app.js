@@ -799,7 +799,8 @@ showPage('dashboard');
 
       // Bot response
       if (t.botResponse) {
-        body += `<div class="turn-msg"><span class="turn-msg__role turn-msg__role--bot">bot</span><span class="turn-msg__content">${esc(t.botResponse)}</span></div>`;
+        const botText = translationCache.get(t.botResponse) || t.botResponse;
+        body += `<div class="turn-msg"><span class="turn-msg__role turn-msg__role--bot">bot</span><span class="turn-msg__content">${esc(botText)}</span></div>`;
       } else if (t.type === 'exchange') {
         body += `<div class="turn-msg--no-response">⚠ Bot did not respond</div>`;
       }
@@ -899,7 +900,10 @@ showPage('dashboard');
       t.supplierInputs.forEach((msg, mi) => {
         displayHistory.push({ role: 'supplier', content: getTranslated(t, mi, msg) });
       });
-      if (t.botResponse) displayHistory.push({ role: 'bot', content: t.botResponse });
+      if (t.botResponse) {
+        const botTranslated = translationCache.get(t.botResponse) || null;
+        displayHistory.push({ role: 'bot', content: botTranslated || t.botResponse });
+      }
     }
 
     const forkMsgs = $('pg-fork-messages');
@@ -919,7 +923,8 @@ showPage('dashboard');
       html += `<div class="chat-msg chat-msg--supplier"><div class="chat-msg__role">supplier</div>${esc(getTranslated(originalTurn, mi, msg))}</div>`;
     }
     if (originalTurn.botResponse) {
-      html += `<div class="chat-msg chat-msg--bot"><div class="chat-msg__role">bot</div>${esc(originalTurn.botResponse)}</div>`;
+      const botT = translationCache.get(originalTurn.botResponse) || originalTurn.botResponse;
+      html += `<div class="chat-msg chat-msg--bot"><div class="chat-msg__role">bot</div>${esc(botT)}</div>`;
     } else {
       html += `<div class="chat-msg chat-msg--system"><div class="chat-msg__role">system</div>Bot did not respond at this turn.</div>`;
     }
@@ -1025,16 +1030,19 @@ showPage('dashboard');
     const btn = $('pg-translate-btn');
     const turns = currentCase.turns || [];
 
-    // Collect all Chinese supplier messages
+    // Collect all Chinese messages (both supplier and bot)
     const allTexts = [];
-    const textMap = []; // [{turnIdx, msgIdx}]
+    const textMap = []; // [{turnIdx, msgIdx}] for supplier inputs
     turns.forEach((t, ti) => {
       (t.supplierInputs || []).forEach((msg, mi) => {
-        if (msg && !/^[\x00-\x7F]*$/.test(msg)) {
+        if (msg && !/^[\x00-\x7F]*$/.test(msg) && !translationCache.has(msg)) {
           allTexts.push(msg);
           textMap.push({ ti, mi });
         }
       });
+      if (t.botResponse && !/^[\x00-\x7F]*$/.test(t.botResponse) && !translationCache.has(t.botResponse)) {
+        allTexts.push(t.botResponse);
+      }
     });
 
     if (!allTexts.length) { btn.textContent = 'Nothing to translate'; setTimeout(() => { btn.textContent = 'Translate to English'; }, 1500); return; }
